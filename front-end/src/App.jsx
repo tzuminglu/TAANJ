@@ -51,8 +51,13 @@ function App() {
         <Route path="/photos" element={<Photos />} />
       </Routes>
       <Footer>
-        {" "}
-        <Avatar alt="fb logo" src="http://tinyurl.com/572fbj7w" />
+        <a
+          href="https://www.facebook.com/TAANewJersey?fref=nf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Avatar alt="fb logo" src="http://tinyurl.com/572fbj7w" />
+        </a>
       </Footer>
     </div>
   );
