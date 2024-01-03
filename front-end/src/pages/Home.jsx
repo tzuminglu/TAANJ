@@ -2,6 +2,7 @@ import React from "react";
 
 import ActivitySlide from "../components/ActivitySlide";
 import AboutSlide from "../components/AboutSlide";
+import RegularCard from "../components/RegularCard";
 
 const activities = [
   {
@@ -45,6 +46,66 @@ const about = [
     content:
       "We promote Taiwanese American participation in government activities.",
     url: "https://www.taa-nj.org/TAANJ/749d90c93849465195698a2c17d5a104.jpg",
+  },
+  {
+    id: "about_4",
+    content:
+      "We assemble Taiwanese Americans for fellowship, seminars, and other social activities.",
+    url: "https://www.taa-nj.org/TAANJ/00700f200059cd2cd1690b740c642f8a.jpg",
+  },
+  {
+    id: "about_5",
+    content:
+      "We reach out to needy Taiwanese Americans and to provide them with available assistance.",
+    url: "https://www.taa-nj.org/TAANJ/744b15fb7c38a25ef80d36edca60af30.jpg",
+  },
+];
+
+const regularActivities = [
+  {
+    id: "ra_1",
+    title: "New Jersey Living Well Club",
+    date: "Every Wednesday",
+    contact: "hannaliao@aol.com",
+    host: "茂清",
+    imgURL: "https://www.taa-nj.org/TAANJ/6767deb527a408be09653f5ff77bc6bf.jpg",
+    bgURL: "https://shorturl.at/jIM38",
+  },
+  {
+    id: "ra_2",
+    title: "UN for Taiwan Rally (NYC)",
+    date: "Every September ",
+    contact: "taanjusa@gmail.com",
+    host: "TAA-NJ",
+    imgURL: "https://www.taa-nj.org/TAANJ/a95ad07cbd82fd1ed2703b94399850a6.jpg",
+    bgURL: "https://shorturl.at/DGQR6",
+  },
+  {
+    id: "ra_3",
+    title: "Princeton Outreach",
+    date: "TBD",
+    contact: "taanjusa@gmail.com",
+    host: "Blue",
+    imgURL: "https://www.taa-nj.org/TAANJ/0b82e7b35ec81f522c13dc58b491fd08.jpg",
+    bgURL: "https://shorturl.at/ksBC3",
+  },
+  {
+    id: "ra_4",
+    title: "TAA-NJ Summer BBQ",
+    date: "Every Summer",
+    contact: "taanjusa@gmail.com",
+    host: "TAA-NJ",
+    imgURL: "https://www.taa-nj.org/TAANJ/9a22c47952fa219011820f52fd22463e.jpg",
+    bgURL: "https://shorturl.at/dqORS",
+  },
+  {
+    id: "ra_5",
+    title: "Sunday Morning Tennis at Lawrencevill Township middle school",
+    date: "Every Sunday 7:30am",
+    contact: "tctsai43@gmail.com",
+    host: "Dr. Tsai",
+    imgURL: "https://www.taa-nj.org/TAANJ/fcd493aa872e5a7a78887caf966def3a.jpg",
+    bgURL: "http://tinyurl.com/2v6knszx",
   },
 ];
 
@@ -125,6 +186,15 @@ function Home() {
               );
             })}
         </div>
+      </div>
+
+      {/* Regular Activities */}
+      <div className="divider"></div>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-1 sm:mx-1 md:grid-cols-2 md:mx-3 lg:grid-cols-3 lg:gap-3 xl:grid-cols-4 xl:gap-3 2xl:grid-cols-5 2xl:gap-3">
+        {regularActivities &&
+          regularActivities.map((activity) => {
+            return <RegularCard key={activity.id} activity={activity} />;
+          })}
       </div>
     </>
   );

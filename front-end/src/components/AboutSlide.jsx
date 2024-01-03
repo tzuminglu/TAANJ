@@ -8,7 +8,7 @@ function AboutSlide({ ele }) {
         {/* <h5 className="mb-2 text-xl font-medium leading-tight text-white">
           Card title
         </h5> */}
-        <p className="mb-4 text-base text-yellow-200 font-mono bg-gray-700">
+        <p className="mb-4 text-base text-yellow-200 font-mono bg-gray-700 p-3">
           {ele.content}
         </p>
       </div>

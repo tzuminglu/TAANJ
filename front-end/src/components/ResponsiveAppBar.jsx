@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-const pages = ["About", "Members", "Photos"];
+const pages = ["Home", "About", "Members", "Photos"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
@@ -32,7 +32,7 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
-    navigate(`/${page.toLowerCase()}`);
+    navigate(`/${page === "Home" ? "" : page.toLowerCase()}`);
   };
 
   const handleCloseUserMenu = () => {
@@ -54,6 +54,7 @@ function ResponsiveAppBar() {
               letterSpacing: ".01rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer",
             }}
             onClick={() => navigate("/")}
           >
@@ -111,6 +112,7 @@ function ResponsiveAppBar() {
               letterSpacing: ".01rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer",
             }}
             onClick={() => navigate("/")}
           >
