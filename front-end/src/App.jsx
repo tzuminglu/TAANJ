@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Members from "./pages/Members";
 import Photos from "./pages/Photos";
 
+import BackToTopButton from "./components/BackToTopButton";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 
 import Divider from "@mui/material/Divider";
@@ -37,7 +38,7 @@ function App() {
     <div className="App flex flex-col min-h-screen">
       <main className="mt-16">
         <ResponsiveAppBar />
-        <Img alt="TAANJ Logo" src={taanj}/>
+        <Img alt="TAANJ Logo" src={taanj} />
         <Typography
           variant="h6"
           sx={{ textAlign: "center", marginY: "1%", fontFamily: "monospace" }}
@@ -73,9 +74,13 @@ function App() {
           </div>
         </nav>
         <aside>
-          <p>Copyright © 2024 - All right reserved by TAANJ</p>
+          <p>
+            Copyright © All right reserved by The Taiwanese Association of
+            American in New Jersey Chapter
+          </p>
         </aside>
       </footer>
+      <BackToTopButton />
     </div>
   );
 }

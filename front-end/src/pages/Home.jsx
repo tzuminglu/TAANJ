@@ -121,7 +121,7 @@ function Home() {
             <div className="flex justify-center w-full">
               <h2 className="card-title font-mono text-center text-3xl">
                 The Taiwanese Association of American in New Jersey Chapter
-                (TAA-NJ)
+                (TAA—NJ)
               </h2>
             </div>
             <p className="font-mono">

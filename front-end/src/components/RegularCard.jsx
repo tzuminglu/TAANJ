@@ -3,7 +3,7 @@ import React from "react";
 function RegularCard({ activity }) {
   return (
     <div
-      className="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-4xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4"
+      className="preview border-base-300 bg-base-100 rounded-b-box rounded-se-box flex min-h-[6rem] min-w-[18rem] max-w-4xl overflow-x-hidden bg-cover bg-top p-4"
       style={{
         backgroundImage: `url(${activity.bgURL})`,
         backgroundSize: "cover",
