@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../style.css";
 
-import PhotoSlide from "../components/PhotoSlide";
+import PhotoSlide from "../components/Photos/PhotoSlide";
 
 const photos = [
   {

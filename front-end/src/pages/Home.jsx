@@ -1,8 +1,8 @@
 import React from "react";
 
-import ActivitySlide from "../components/ActivitySlide";
-import AboutSlide from "../components/AboutSlide";
-import RegularCard from "../components/RegularCard";
+import ActivitySlide from "../components/Home/ActivitySlide";
+import AboutSlide from "../components/Home/AboutSlide";
+import RegularCard from "../components/Home/RegularCard";
 
 const activities = [
   {
@@ -143,7 +143,7 @@ function Home() {
 
       <div className="divider"></div>
 
-      {/* More About TAANJ */}
+      {/* Goals */}
       <div className="flex items-center justify-center">
         <div className="h-screen carousel carousel-vertical rounded-box">
           {about &&
@@ -155,12 +155,20 @@ function Home() {
 
       <div className="divider"></div>
 
+      {/* Upcoming Events */}
+
+      <div className="divider"></div>
+      {/* <div className="flex justify-center w-full gap-2 relative">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
+          Upcoming Events
+        </h2>
+      </div> */}
       {/* Past Events Components */}
-      <div className="flex justify-center w-full gap-2 relative mt-10">
-        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl my-0">
+      <div className="flex justify-center w-full gap-2 relative">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
           Past Events
         </h2>
-        <div className="carousel rounded-box w-7/12 h-auto my-10">
+        <div className="carousel rounded-box w-7/12 h-auto mt-12">
           {activities &&
             activities.map((activity) => {
               return (

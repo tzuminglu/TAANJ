@@ -3,8 +3,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { Route, Routes } from "react-router-dom";
-// import 'daisyui/dist/full.css';
+
+import config from './firecase/FirebaseConfig.js';
+import {initializeApp} from 'firebase/app';
+
+initializeApp(config);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>

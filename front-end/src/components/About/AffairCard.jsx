@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-import noImage from "../assets/no-image.png";
+import noImage from "../../assets/no-image.png";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";

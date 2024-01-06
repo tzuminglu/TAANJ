@@ -2,8 +2,8 @@ import React from "react";
 
 import { Grid, Divider, Typography } from "@mui/material";
 
-import AffairCard from "../components/AffairCard";
-import SponsorCard from "../components/SponsorCard";
+import AffairCard from "../components/About/AffairCard";
+import SponsorCard from "../components/About/SponsorCard";
 
 const affairs = [
   {

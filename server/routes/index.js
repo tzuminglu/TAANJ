@@ -1,7 +1,7 @@
-import recipesRoutes from "./recipes.js";
+import userRoutes from "./user.js";
 
 const constructorMethod = (app) => {
-  app.use("/", recipesRoutes);
+  app.use("/", userRoutes);
 
   app.use("*", (req, res) => {
     res.status(404).json({ error: "Route Not Found" });

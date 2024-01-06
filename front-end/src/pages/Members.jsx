@@ -1,5 +1,5 @@
 import * as React from "react";
-import MembersCard from "../components/MembersCard";
+import MembersCard from "../components/Member/MembersCard";
 import { Grid } from "@mui/material";
 
 const members = [

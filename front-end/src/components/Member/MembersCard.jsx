@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
-import noImage from "../assets/no-image.png";
+import noImage from "../../assets/no-image.png";
 
 const Img = styled("img")({
   margin: "auto",
