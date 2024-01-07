@@ -3,14 +3,14 @@ import dotenv from "dotenv";
 import configRoutes from "./routes/index.js";
 import cors from "cors";
 import { createClient } from "redis";
-import {asyncRedis} from "async-redis";
+const asyncRedis = require("async-redis");
 
 dotenv.config();
-const redisClient = asyncRedis.createClient(process.env.REDISTOGO_URL);
+const client = asyncRedis.createClient(process.env.REDISTOGO_URL);
 const app = express();
 const port = process.env.PORT || 3000
 
-redisClient.connect().then(() => {});
+client.connect().then(() => {});
 
 app.use(express.json());
 app.use(cors());
