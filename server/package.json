@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm install && nodemon app.js",
+    "start": "node app.js",
     "heroku-postbuild": "cd front-end && npm install && npm run dev",
     "seed": "node ./tasks/seed.js"
   },
