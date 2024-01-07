@@ -6,7 +6,7 @@ const client = createClient();
 client.connect().then(() => {});
 
 router.post("/upcomingevent/create", async (req, res) => {
-  console.log("I'm in /admin/upcomingevent/create");
+  console.log("I'm in /admin/upcomingevent/create qwe");
   //   let characterList;
   //   if (await client.exists("characterList")) {
   //     characterList = await client.LRANGE("characterList", 0, 19);
