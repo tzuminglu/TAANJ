@@ -5,11 +5,11 @@ import cors from "cors";
 import { createClient } from "redis";
 
 dotenv.config();
-const client = createClient();
+const redisClient = asyncRedis.createClient(process.env.REDISTOGO_URL);
 const app = express();
 const port = process.env.PORT || 3000
 
-client.connect().then(() => {});
+redisClient.connect().then(() => {});
 
 app.use(express.json());
 app.use(cors());
