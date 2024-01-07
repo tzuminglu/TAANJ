@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
+import CreateForm from "../components/Admin/UpcomingEvent/CreateForm";
+import UpdateForm from "../components/Admin/UpcomingEvent/UpdateForm";
+
 function Admin() {
   const [showUpcomingEventDropdown, setShowUpcomingEventDropdown] =
     useState(false);
   const [showPastEventDropdown, setShowPastEventDropdown] = useState(false);
   const [showPhotos, setShowPhotos] = useState(false);
+  const [showFormType, setShowFormType] = useState(null);
 
   const toggleUpcomingChildDropdown = () => {
     setShowUpcomingEventDropdown(!showUpcomingEventDropdown);
@@ -14,6 +18,10 @@ function Admin() {
   };
   const togglePhotosChildDropdown = () => {
     setShowPhotos(!showPhotos);
+  };
+
+  const showForm = (formType) => {
+    setShowFormType(formType);
   };
 
   return (
@@ -30,10 +38,12 @@ function Admin() {
             <a>Upcoming Event &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &gt;</a>
             {showUpcomingEventDropdown && (
               <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-52">
-                <li>
+                <li onClick={() => showForm("createUpcomingEvent")}>
+                  {" "}
                   <a>Add New Event</a>
                 </li>
-                <li>
+                <li onClick={() => showForm("updateUpcomingEvent")}>
+                  {" "}
                   <a>Update Event Information</a>
                 </li>
               </ul>
@@ -75,6 +85,8 @@ function Admin() {
           </li>
         </ul>
       </div>
+      {showFormType === "createUpcomingEvent" && <CreateForm />}
+      {showFormType === "updateUpcomingEvent" && <UpdateForm />}
     </div>
   );
 }

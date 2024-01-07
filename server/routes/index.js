@@ -1,7 +1,7 @@
-import userRoutes from "./user.js";
+import upcomingeventRoutes from "./upcomingEvent.js";
 
 const constructorMethod = (app) => {
-  app.use("/", userRoutes);
+  app.use("/admin", upcomingeventRoutes);
 
   app.use("*", (req, res) => {
     res.status(404).json({ error: "Route Not Found" });
