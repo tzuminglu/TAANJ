@@ -2,12 +2,12 @@ import express from "express";
 import dotenv from "dotenv";
 import configRoutes from "./routes/index.js";
 import cors from "cors";
-import { createClient } from "redis";
-import asyncRedis from "async-redis";
+// import { createClient } from "redis";
+// import asyncRedis from "async-redis";
 
 
 dotenv.config();
-const client = asyncRedis.createClient(process.env.REDISTOGO_URL);
+// const client = asyncRedis.createClient(process.env.REDISTOGO_URL);
 const app = express();
 const port = process.env.PORT || 3000
 
@@ -27,5 +27,5 @@ app.use("/admin/upcomingevent", async (req, res, next) => {
 configRoutes(app);
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  console.log(`App listening at ${port}`);
 });

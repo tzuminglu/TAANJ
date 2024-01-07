@@ -1,9 +1,9 @@
 import { Router, json } from "express";
 const router = Router();
 import axios from "axios";
-import { createClient } from "redis";
-const client = createClient();
-client.connect().then(() => {});
+// import { createClient } from "redis";
+// const client = createClient();
+// client.connect().then(() => {});
 
 router.post("/upcomingevent/create", async (req, res) => {
   console.log("I'm in /admin/upcomingevent/create");
