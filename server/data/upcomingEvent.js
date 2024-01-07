@@ -9,7 +9,7 @@ const exportedMethods = {
     time = validation.checkString(time, "time");
     location = validation.checkString(location, "location");
     info = validation.checkString(info, "info");
-    photo - validation.checkString(photo, "photo");
+    photo = validation.checkString(photo, "photo");
 
     let newPost = {
       title,

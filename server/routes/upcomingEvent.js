@@ -5,7 +5,7 @@ import { createClient } from "redis";
 const client = createClient();
 client.connect().then(() => {});
 
-router.get("/upcomingevent/create", async (req, res) => {
+router.post("/upcomingevent/create", async (req, res) => {
   console.log("I'm in /admin/upcomingevent/create");
   //   let characterList;
   //   if (await client.exists("characterList")) {
@@ -24,6 +24,9 @@ router.get("/upcomingevent/create", async (req, res) => {
   //     })
   //   );
   //   res.status(200).json(characterHistoryList);
+  let { name, description, startValue, endValue, location } = req.body;
+  console.log(name, description, startValue, endValue, location)
+  // console.log(req)
 
   res.status(200).json({ success: "Test is successful" });
 });

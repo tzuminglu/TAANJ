@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import dayjs from "dayjs";
+import axios from "axios";
 
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
@@ -25,9 +26,36 @@ function CreateForm() {
     setLocation("");
   };
 
+  //   handle submit button
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const eventData = {
+      name,
+      description,
+      startValue,
+      endValue,
+      location,
+    };
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_ADDRESS}/admin/upcomingevent/create`, eventData);
+
+      if (response.status === 200) {
+        alert("Event created successfully!");
+        resetForm();
+      } else {
+        alert("Failed to create event. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error creating event:", error);
+      alert("An error occurred while creating the event. Please try again.");
+    }
+  };
+
   return (
     <div className="flex items-center justify-center h-full bg-white">
-      <form className="w-full max-w-md">
+      <form className="w-full max-w-md" onSubmit={handleSubmit}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -80,7 +108,7 @@ function CreateForm() {
                     }}
                     rows={10}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={description}
+                    value={description}
                   />
                 </div>
                 <p className="mt-3 text-sm leading-6 text-gray-600">
