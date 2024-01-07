@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import configRoutes from "./routes/index.js";
 import cors from "cors";
 import { createClient } from "redis";
+import {asyncRedis} from "async-redis";
 
 dotenv.config();
 const redisClient = asyncRedis.createClient(process.env.REDISTOGO_URL);
