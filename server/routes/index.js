@@ -1,11 +1,14 @@
 import upcomingeventRoutes from "./upcomingEvent.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 const constructorMethod = (app) => {
-  app.use("/admin", upcomingeventRoutes);
-
   app.use("*", (req, res) => {
-    res.status(404).json({ error: "Route Not Found" });
+    res.sendFile(path.join(__dirname + "/front-end/build/index.html"));
   });
+
+  app.use("/admin", upcomingeventRoutes);
 };
 
 export default constructorMethod;

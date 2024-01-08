@@ -17,9 +17,9 @@ const __dirname = dirname(__filename);
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'front-end/build')));
 
 app.get("/", (req, res) => {
-  console.log(path.join(__dirname));
   res.send("Hello World! 123");
 });
 
