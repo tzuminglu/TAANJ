@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname,"front-end","dist")));
 
 app.get("/", async(req, res) => {
   console.log((path.join(__dirname, '../front-end/dist')))
+  console.log(req)
   res.json("Hello World! 123");
 });
 
