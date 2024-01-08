@@ -5,7 +5,9 @@ import { dirname } from "path";
 
 const constructorMethod = (app) => {
   app.use("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/front-end/build/index.html"));
+    res.sendFile(
+      path.join(__dirname, "front-end", "dist", "assets/index.html")
+    );
   });
 
   app.use("/admin", upcomingeventRoutes);
