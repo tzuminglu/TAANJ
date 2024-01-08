@@ -17,10 +17,10 @@ const __dirname = dirname(__filename);
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../front-end/build')));
+app.use(express.static(path.join(__dirname,"front-end","dist")));
 
-app.get("/", (req, res) => {
-  console.log((path.join(__dirname, '../front-end/build')))
+app.get("/", async(req, res) => {
+  console.log((path.join(__dirname, '../front-end/dist')))
   res.json("Hello World! 123");
 });
 
