@@ -7,9 +7,9 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 // import { createClient } from "redis";
 // import asyncRedis from "async-redis";
+// const client = asyncRedis.createClient(process.env.REDISTOGO_URL);
 
 dotenv.config();
-// const client = asyncRedis.createClient(process.env.REDISTOGO_URL);
 const app = express();
 const port = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
@@ -17,10 +17,11 @@ const __dirname = dirname(__filename);
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'front-end/build')));
+app.use(express.static(path.join(__dirname, '../front-end/build')));
 
 app.get("/", (req, res) => {
-  res.send("Hello World! 123");
+  console.log((path.join(__dirname, '../front-end/build')))
+  res.json("Hello World! 123");
 });
 
 // routes for upcoming event
