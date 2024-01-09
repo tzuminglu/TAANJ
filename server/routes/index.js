@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 const constructorMethod = (app) => {
-  app.use("/admin", upcomingeventRoutes);
+  app.use("/", upcomingeventRoutes);
 
   app.use("*", (req, res) => {
     // res.sendFile(

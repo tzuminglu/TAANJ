@@ -29,8 +29,13 @@ app.get("/", async (req, res) => {
   res.json("Hello World! 123");
 });
 
-// routes for upcoming event
+// routes for admin upcoming event
 app.use("/admin/upcomingevent", async (req, res, next) => {
+  next();
+});
+
+// routes for upcoming event
+app.use("/", async (req, res, next) => {
   next();
 });
 

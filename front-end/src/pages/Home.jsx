@@ -3,6 +3,7 @@ import React from "react";
 import ActivitySlide from "../components/Home/ActivitySlide";
 import AboutSlide from "../components/Home/AboutSlide";
 import RegularCard from "../components/Home/RegularCard";
+import UpcomingEvent from "../components/Home/UpcomingEvent";
 
 const activities = [
   {
@@ -156,13 +157,17 @@ function Home() {
       <div className="divider"></div>
 
       {/* Upcoming Events */}
-
-      <div className="divider"></div>
-      {/* <div className="flex justify-center w-full gap-2 relative">
+      <div className="flex justify-center w-full gap-2 relative">
         <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
           Upcoming Events
         </h2>
-      </div> */}
+        <div className="carousel rounded-box w-7/12 h-auto mt-12">
+          <UpcomingEvent />
+        </div>
+      </div>
+
+      <div className="divider"></div>
+
       {/* Past Events Components */}
       <div className="flex justify-center w-full gap-2 relative">
         <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">

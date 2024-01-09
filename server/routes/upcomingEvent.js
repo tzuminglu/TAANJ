@@ -1,5 +1,4 @@
 import { Router, json } from "express";
-import axios from "axios";
 import upcomingEventFn from "../data/upcomingEvent.js";
 import { uploadFileToS3 } from "../aws.js";
 import cors from "cors";
@@ -10,24 +9,42 @@ const upload = multer({ storage });
 
 const router = Router();
 
-router.post("/upcomingevent/create", cors(), async (req, res) => {
+router.get("/upcomingevent", cors(), async (req, res) => {
+  console.log("I'm in /upcomingevent");
+  const post = await upcomingEventFn.getPostById("0");
+  if (!post) return res.status(400).json({ message: "Bad request" });
+
+  res.status(200).json({ post, message: "Test is successful" });
+});
+
+router.post("/admin/upcomingevent/create", cors(), async (req, res) => {
   console.log("I'm in /admin/upcomingevent/create");
-  let { name, description, startValue, endValue, location, uploadImageURL } =
-    req.body;
+  let {
+    name,
+    description,
+    startValue,
+    endValue,
+    location,
+    uploadImageURL,
+    link1,
+    link2,
+  } = req.body;
   const newPost = await upcomingEventFn.addPost(
     name,
     description,
     startValue,
     endValue,
     location,
-    uploadImageURL
+    uploadImageURL,
+    link1,
+    link2
   );
 
   res.status(200).json({ success: "Test is successful" });
 });
 
 router.post(
-  "/upcomingevent/imageupload",
+  "/admin/upcomingevent/imageupload",
   cors(),
   upload.single("image"),
   async (req, res) => {

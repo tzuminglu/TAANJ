@@ -26,7 +26,8 @@ function CreateForm() {
   const [endValue, setEndValue] = useState(dayjs(new Date()));
   const [location, setLocation] = useState("");
   const [image, setImage] = useState(undefined);
-  const [isUploadCompleted, setIsUploadCompleted] = useState(false);
+  const [link1, setLink1] = useState("");
+  const [link2, setLink2] = useState("");
 
   const {
     mutate: uploadImage,
@@ -42,6 +43,8 @@ function CreateForm() {
     setStartValue(dayjs(new Date()));
     setEndValue(dayjs(new Date()));
     setLocation("");
+    setLink1("");
+    setLink2("");
     setImage(undefined);
   };
 
@@ -50,6 +53,8 @@ function CreateForm() {
     const file = e.target.files[0];
     if (!validImageTypes.find((type) => type === file.type)) {
       setError("File must be JPG/PNG/GIF format");
+    } else if (file.size > 1000000) {
+      alert("Image size is greater than 10MB");
     } else {
       setImage(file);
       const form = new FormData();
@@ -70,6 +75,8 @@ function CreateForm() {
       endValue,
       location,
       uploadImageURL,
+      link1,
+      link2,
     };
 
     try {
@@ -100,7 +107,7 @@ function CreateForm() {
               Create New Upcoming Event
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              This page is designed for creating new events that will be
+              This page is designed for creating new upcoming event that will be
               displayed on the Home page.
             </p>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -109,7 +116,7 @@ function CreateForm() {
                   htmlFor="event-name"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Event Name*
+                  Event Name
                 </label>
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -144,14 +151,13 @@ function CreateForm() {
                     onChange={(e) => {
                       setDescription(e.target.value);
                     }}
+                    wrap="hard"
                     rows={10}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full bg-transparent rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     value={description}
+                    placeholder=" Describe the event"
                   />
                 </div>
-                <p className="mt-3 text-sm leading-6 text-gray-600">
-                  Describe the event.
-                </p>
               </div>
 
               <div className="col-span-full">
@@ -203,7 +209,8 @@ function CreateForm() {
               Information
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              Some information about the event like time and location.
+              Please indicate the event&apos;s start and end times, its
+              location, and any associated Facebook or other links.
             </p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -219,13 +226,8 @@ function CreateForm() {
                     components={["DateTimePicker", "DateTimePicker"]}
                   >
                     <DateTimePicker
-                      label="Start Date and Time"
-                      value={startValue}
-                      onChange={(newValue) =>
-                        setStartValue(
-                          dayjs(newValue["$d"]).format("YYYY-MM-DDTHH:mm:ss")
-                        )
-                      }
+                      value={dayjs(startValue)}
+                      onChange={(newValue) => setStartValue(dayjs(newValue))}
                     />
                   </DemoContainer>
                 </LocalizationProvider>
@@ -243,13 +245,8 @@ function CreateForm() {
                     components={["DateTimePicker", "DateTimePicker"]}
                   >
                     <DateTimePicker
-                      label="End Date and Time"
                       value={endValue}
-                      onChange={(newValue) =>
-                        setEndValue(
-                          dayjs(newValue["$d"]).format("YYYY-MM-DDTHH:mm:ss")
-                        )
-                      }
+                      onChange={(newValue) => setEndValue(dayjs(newValue))}
                     />
                   </DemoContainer>
                 </LocalizationProvider>
@@ -262,9 +259,7 @@ function CreateForm() {
                 >
                   Location
                 </label>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Address or Google map link
-                </p>
+                <p className="mt-1 text-sm leading-6 text-gray-600"></p>
                 <div className="mt-2">
                   <input
                     id="location"
@@ -275,7 +270,54 @@ function CreateForm() {
                     onChange={(e) => {
                       setLocation(e.target.value);
                     }}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full bg-transparent rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder=" Address or Google map link"
+                  />
+                </div>
+              </div>
+              <div className="sm:col-span-4">
+                <label
+                  htmlFor="link1"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Link 1
+                </label>
+                <p className="mt-1 text-sm leading-6 text-gray-600"></p>
+                <div className="mt-2">
+                  <input
+                    id="link1"
+                    name="link1"
+                    type="text"
+                    autoComplete="link1"
+                    value={link1}
+                    onChange={(e) => {
+                      setLink1(e.target.value);
+                    }}
+                    className="block w-full bg-transparent rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder=" Provide website address"
+                  />
+                </div>
+              </div>
+              <div className="sm:col-span-4">
+                <label
+                  htmlFor="link2"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Link 2
+                </label>
+                <p className="mt-1 text-sm leading-6 text-gray-600"></p>
+                <div className="mt-2">
+                  <input
+                    id="link2"
+                    name="link2"
+                    type="text"
+                    autoComplete="link2"
+                    value={link2}
+                    onChange={(e) => {
+                      setLink2(e.target.value);
+                    }}
+                    className="block w-full bg-transparent rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder=" Provide website address"
                   />
                 </div>
               </div>
@@ -283,7 +325,7 @@ function CreateForm() {
           </div>
         </div>
 
-        <div className="mt-6 flex items-center justify-end gap-x-6">
+        <div className="my-3 flex items-center justify-end gap-x-6">
           <button
             type="button"
             className="text-sm font-semibold leading-6 text-gray-900"
