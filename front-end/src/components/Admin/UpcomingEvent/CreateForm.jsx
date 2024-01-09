@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import ErrorText from "../../General/ErrorText";
+import useUploadImage from "../../../hooks/useUploadImage";
 
 import dayjs from "dayjs";
-import axios from "axios";
+import axiosClient from "../../../axios/config";
 
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
@@ -10,12 +13,27 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
+const validImageTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
+
+const imageURL = "/admin/upcomingevent/imageupload";
+const formURL = "/admin/upcomingevent/create";
+
 function CreateForm() {
+  const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [startValue, setStartValue] = useState(dayjs(new Date()));
   const [endValue, setEndValue] = useState(dayjs(new Date()));
   const [location, setLocation] = useState("");
+  const [image, setImage] = useState(undefined);
+  const [isUploadCompleted, setIsUploadCompleted] = useState(false);
+
+  const {
+    mutate: uploadImage,
+    isLoading: uploading,
+    error: uploadError,
+    imageURL: uploadImageURL,
+  } = useUploadImage({ url: imageURL });
 
   // reset all information in the form
   const resetForm = () => {
@@ -24,11 +42,34 @@ function CreateForm() {
     setStartValue(dayjs(new Date()));
     setEndValue(dayjs(new Date()));
     setLocation("");
+    setImage(undefined);
+  };
+
+  //   handle upload image
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    if (!validImageTypes.find((type) => type === file.type)) {
+      setError("File must be JPG/PNG/GIF format");
+    } else {
+      setImage(file);
+      setError("");
+    }
   };
 
   //   handle submit button
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // upload image first and get url
+    const form = new FormData();
+    form.append("image", image);
+    await uploadImage(form);
+
+    if (!isUploadCompleted) {
+        alert("Image is still uploading. Please wait.");
+        return;
+      }  
 
     const eventData = {
       name,
@@ -36,10 +77,15 @@ function CreateForm() {
       startValue,
       endValue,
       location,
+      uploadImageURL,
     };
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_ADDRESS}/admin/upcomingevent/create`, eventData);
+      const response = await axiosClient({
+        url: formURL,
+        data: eventData,
+        method: "POST",
+      });
 
       if (response.status === 200) {
         alert("Event created successfully!");
@@ -52,6 +98,13 @@ function CreateForm() {
       alert("An error occurred while creating the event. Please try again.");
     }
   };
+
+  // let the form submit after the image url generated
+  useEffect(() => {
+    if (uploadImageURL) {
+      setIsUploadCompleted(true);
+    }
+  }, [uploadImageURL]);
 
   return (
     <div className="flex items-center justify-center h-full bg-white">
@@ -118,31 +171,10 @@ function CreateForm() {
 
               <div className="col-span-full">
                 <label
-                  htmlFor="photo"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Photo
-                </label>
-                <div className="mt-2 flex items-center gap-x-3">
-                  <UserCircleIcon
-                    className="h-12 w-12 text-gray-300"
-                    aria-hidden="true"
-                  />
-                  <button
-                    type="button"
-                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  >
-                    Change
-                  </button>
-                </div>
-              </div>
-
-              <div className="col-span-full">
-                <label
                   htmlFor="cover-photo"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Cover photo
+                  Cover Photo
                 </label>
                 <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                   <div className="text-center">
@@ -161,15 +193,22 @@ function CreateForm() {
                           name="file-upload"
                           type="file"
                           className="sr-only"
+                          onChange={handleUpload}
                         />
                       </label>
-                      <p className="pl-1">or drag and drop</p>
                     </div>
                     <p className="text-xs leading-5 text-gray-600">
-                      PNG, JPG, GIF up to 10MB
+                      PNG, JPG, JPEG, GIF up to 10MB
                     </p>
                   </div>
                 </div>
+                {image && (
+                  <p className="text-md mt-3 leading-5 text-gray-600">
+                    {image.name}
+                  </p>
+                )}
+                {error && <ErrorText>{error}</ErrorText>}
+                {uploadError && <ErrorText>{uploadError}</ErrorText>}
               </div>
             </div>
           </div>

@@ -2,21 +2,21 @@ import { upcomingEvent } from "../mongodb/mongoCollection.js";
 import validation from "../tasks/helper.js";
 
 const exportedMethods = {
-  async addPost(title, body, time, location, info, photo) {
+  async addPost(name, description, startValue, endValue, location, photo) {
     let _id = "0";
-    title = validation.checkString(title, "title");
-    body = validation.checkString(body, "body");
-    time = validation.checkString(time, "time");
+    name = validation.checkString(name, "name");
+    description = validation.checkString(description, "description");
+    startValue = validation.checkString(startValue, "startValue");
+    endValue = validation.checkString(endValue, "endValue");
     location = validation.checkString(location, "location");
-    info = validation.checkString(info, "info");
     photo = validation.checkString(photo, "photo");
 
     let newPost = {
-      title,
-      body,
-      time,
+      name,
+      description,
+      startValue,
+      endValue,
       location,
-      info,
       photo,
     };
 
@@ -39,22 +39,22 @@ const exportedMethods = {
     }
   },
 
-  async updatePost(title, body, time, location, info, photo) {
+  async updatePost(name, description, startValue, endValue, location, photo) {
     let _id = "0";
-    title = validation.checkString(title, "title");
-    body = validation.checkString(body, "body");
-    time = validation.checkString(time, "time");
+    name = validation.checkString(name, "name");
+    description = validation.checkString(description, "description");
+    startValue = validation.checkString(startValue, "startValue");
+    endValue = validation.checkString(endValue, "endValue");
     location = validation.checkString(location, "location");
-    info = validation.checkString(info, "info");
-    photo - validation.checkString(photo, "photo");
+    photo = validation.checkString(photo, "photo");
 
     const upcomingEventCollection = await upcomingEvent();
     let newPost = {
-      title,
-      body,
-      time,
+      name,
+      description,
+      startValue,
+      endValue,
       location,
-      info,
       photo,
     };
     let updatedInfo = await upcomingEventCollection.findOneAndUpdate(

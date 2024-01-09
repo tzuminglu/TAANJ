@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 import configRoutes from "./routes/index.js";
 import cors from "cors";
 import path from "path";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 // import { createClient } from "redis";
 // import asyncRedis from "async-redis";
 // const client = asyncRedis.createClient(process.env.REDISTOGO_URL);
@@ -12,16 +12,20 @@ import { dirname } from 'path';
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 app.use(express.json());
-app.use(cors());
-app.use(express.static(path.join(__dirname,"front-end","dist")));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
+// app.use(express.static(path.join(__dirname,"front-end","dist")));
 
-app.get("/", async(req, res) => {
-  console.log((path.join(__dirname, '../front-end/dist')))
-  console.log(req)
+app.get("/", async (req, res) => {
+  // console.log((path.join(__dirname, '../front-end/dist')))
   res.json("Hello World! 123");
 });
 
