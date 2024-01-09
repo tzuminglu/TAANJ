@@ -46,13 +46,15 @@ function CreateForm() {
   };
 
   //   handle upload image
-  const handleUpload = (e) => {
+  const handleUpload = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
     if (!validImageTypes.find((type) => type === file.type)) {
       setError("File must be JPG/PNG/GIF format");
     } else {
       setImage(file);
+      const form = new FormData();
+      form.append("image", file);
+      await uploadImage(form);
       setError("");
     }
   };
@@ -60,16 +62,6 @@ function CreateForm() {
   //   handle submit button
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // upload image first and get url
-    const form = new FormData();
-    form.append("image", image);
-    await uploadImage(form);
-
-    if (!isUploadCompleted) {
-        alert("Image is still uploading. Please wait.");
-        return;
-      }  
 
     const eventData = {
       name,
@@ -98,13 +90,6 @@ function CreateForm() {
       alert("An error occurred while creating the event. Please try again.");
     }
   };
-
-  // let the form submit after the image url generated
-  useEffect(() => {
-    if (uploadImageURL) {
-      setIsUploadCompleted(true);
-    }
-  }, [uploadImageURL]);
 
   return (
     <div className="flex items-center justify-center h-full bg-white">

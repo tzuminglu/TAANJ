@@ -12,7 +12,8 @@ const router = Router();
 
 router.post("/upcomingevent/create", cors(), async (req, res) => {
   console.log("I'm in /admin/upcomingevent/create");
-  let { name, description, startValue, endValue, location, uploadImageURL } = req.body;
+  let { name, description, startValue, endValue, location, uploadImageURL } =
+    req.body;
   const newPost = await upcomingEventFn.addPost(
     name,
     description,
