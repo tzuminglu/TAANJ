@@ -5,6 +5,12 @@ import AboutSlide from "../components/Home/AboutSlide";
 import RegularCard from "../components/Home/RegularCard";
 import UpcomingEvent from "../components/Home/UpcomingEvent";
 
+import image1 from "../../public/RegularActivity/CardBackground/Taipei-101-Towerjpg.jpg"
+import image2 from "../../public/RegularActivity/CardBackground/Mount-Yu-Shan.jpg"
+import image3 from "../../public/RegularActivity/CardBackground/Qingshui-Cliff.jpg"
+import image4 from "../../public/RegularActivity/CardBackground/Sun-Moon-Lake.jpg"
+import image5 from "../../public/RegularActivity/CardBackground/Jiufen-Old-Street.jpg"
+
 const activities = [
   {
     id: "1",
@@ -70,7 +76,7 @@ const regularActivities = [
     contact: "hannaliao@aol.com",
     host: "茂清",
     imgURL: "https://www.taa-nj.org/TAANJ/6767deb527a408be09653f5ff77bc6bf.jpg",
-    bgURL: "https://shorturl.at/jIM38",
+    bgURL: image1,
   },
   {
     id: "ra_2",
@@ -79,7 +85,7 @@ const regularActivities = [
     contact: "taanjusa@gmail.com",
     host: "TAA-NJ",
     imgURL: "https://www.taa-nj.org/TAANJ/a95ad07cbd82fd1ed2703b94399850a6.jpg",
-    bgURL: "https://shorturl.at/DGQR6",
+    bgURL: image2,
   },
   {
     id: "ra_3",
@@ -88,7 +94,7 @@ const regularActivities = [
     contact: "taanjusa@gmail.com",
     host: "Blue",
     imgURL: "https://www.taa-nj.org/TAANJ/0b82e7b35ec81f522c13dc58b491fd08.jpg",
-    bgURL: "https://shorturl.at/ksBC3",
+    bgURL: image3,
   },
   {
     id: "ra_4",
@@ -97,7 +103,7 @@ const regularActivities = [
     contact: "taanjusa@gmail.com",
     host: "TAA-NJ",
     imgURL: "https://www.taa-nj.org/TAANJ/9a22c47952fa219011820f52fd22463e.jpg",
-    bgURL: "https://shorturl.at/dqORS",
+    bgURL: image4,
   },
   {
     id: "ra_5",
@@ -106,7 +112,7 @@ const regularActivities = [
     contact: "tctsai43@gmail.com",
     host: "Dr. Tsai",
     imgURL: "https://www.taa-nj.org/TAANJ/fcd493aa872e5a7a78887caf966def3a.jpg",
-    bgURL: "http://tinyurl.com/2v6knszx",
+    bgURL: image5,
   },
 ];
 

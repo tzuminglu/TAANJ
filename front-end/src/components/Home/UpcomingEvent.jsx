@@ -35,14 +35,14 @@ function UpcomingEvent() {
               {data.post.startValue
                 .replace("T", " ")
                 .replace(/-/g, "/")
-                .slice(0, -3)}
+                .slice(0, -3)} (ET)
             </p>
             <p>
               End Time:&nbsp;
               {data.post.endValue
                 .replace("T", " ")
                 .replace(/-/g, "/")
-                .slice(0, -3)}
+                .slice(0, -3)}&nbsp;(ET)
             </p>
             <p>Location:&nbsp;{data.post.location}</p>
             Information:&nbsp;

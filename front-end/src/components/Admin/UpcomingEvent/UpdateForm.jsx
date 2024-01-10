@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ErrorText from "../../General/ErrorText";
 import useUploadImage from "../../../hooks/useUploadImage";
@@ -16,10 +17,11 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 const validImageTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
 
 const imageURL = "/admin/upcomingevent/imageupload";
-const formURL = "/admin/upcomingevent/create";
+const formURL = "/admin/upcomingevent/update";
 const dataURL = "/upcomingevent";
 
 function UpdateForm() {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [post, setPost] = useState({
     name: "",
@@ -51,10 +53,6 @@ function UpdateForm() {
       link2: "",
     });
     setImage(undefined);
-  };
-
-  const printSubmit = () => {
-    console.log(post);
   };
 
   //   handle upload image
@@ -95,12 +93,12 @@ function UpdateForm() {
       const response = await axiosClient({
         url: formURL,
         data: eventData,
-        method: "POST",
+        method: "PATCH",
       });
 
       if (response.status === 200) {
         alert("The event has been successfully updated!");
-        printSubmit();
+        navigate("/");
       } else {
         alert("Failed to create event. Please try again.");
       }

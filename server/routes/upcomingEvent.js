@@ -59,4 +59,35 @@ router.post(
   }
 );
 
+router.patch("/admin/upcomingevent/update", cors(), async (req, res) => {
+  console.log("I'm in /admin/upcomingevent/update");
+  let {
+    name,
+    description,
+    startValue,
+    endValue,
+    location,
+    uploadImageURL,
+    link1,
+    link2,
+  } = req.body;
+
+  const updatedPost = await upcomingEventFn
+    .updatePost(
+      name,
+      description,
+      startValue,
+      endValue,
+      location,
+      uploadImageURL,
+      link1,
+      link2
+    )
+    .catch((error) => {
+      res.status(400).json({ error: error.message });
+    });
+
+  res.status(200).json({ success: "Test is successful" });
+});
+
 export default router;

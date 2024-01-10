@@ -1,6 +1,11 @@
 import { upcomingEvent } from "../mongodb/mongoCollection.js";
 import validation from "../tasks/helper.js";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const exportedMethods = {
   async addPost(
@@ -20,8 +25,15 @@ const exportedMethods = {
     // endValue = validation.checkString(endValue, "endValue");
     // location = validation.checkString(location, "location");
     // photo = validation.checkString(photo, "photo");
-    startValue = dayjs(startValue["$d"]).format("YYYY-MM-DDTHH:mm:ss");
-    endValue = dayjs(endValue["$d"]).format("YYYY-MM-DDTHH:mm:ss");
+    // console.log(startValue, end);
+    // startValue = dayjs(["$d"]).format("YYYY-MM-DDTHH:mm:ss");
+    // endValue = dayjs(endValue["$d"]).format("YYYY-MM-DDTHH:mm:ss");
+    startValue = dayjs(startValue)
+      .tz("America/New_York")
+      .format("YYYY-MM-DDTHH:mm:ss");
+    endValue = dayjs(endValue)
+      .tz("America/New_York")
+      .format("YYYY-MM-DDTHH:mm:ss");
 
     const newPost = {
       name,
@@ -53,14 +65,29 @@ const exportedMethods = {
     }
   },
 
-  async updatePost(name, description, startValue, endValue, location, photo) {
+  async updatePost(
+    name,
+    description,
+    startValue,
+    endValue,
+    location,
+    photo,
+    link1,
+    link2
+  ) {
     let _id = "0";
-    name = validation.checkString(name, "name");
-    description = validation.checkString(description, "description");
-    startValue = validation.checkString(startValue, "startValue");
-    endValue = validation.checkString(endValue, "endValue");
-    location = validation.checkString(location, "location");
-    photo = validation.checkString(photo, "photo");
+    // name = validation.checkString(name, "name");
+    // description = validation.checkString(description, "description");
+    // startValue = validation.checkString(startValue, "startValue");
+    // endValue = validation.checkString(endValue, "endValue");
+    // location = validation.checkString(location, "location");
+    // photo = validation.checkString(photo, "photo");
+    startValue = dayjs(startValue)
+      .tz("America/New_York")
+      .format("YYYY-MM-DDTHH:mm:ss");
+    endValue = dayjs(endValue)
+      .tz("America/New_York")
+      .format("YYYY-MM-DDTHH:mm:ss");
 
     const upcomingEventCollection = await upcomingEvent();
     let newPost = {
@@ -70,13 +97,15 @@ const exportedMethods = {
       endValue,
       location,
       photo,
+      link1,
+      link2,
     };
     let updatedInfo = await upcomingEventCollection.findOneAndUpdate(
       { _id },
       { $set: newPost },
       { returnDocument: "after" }
     );
-    if (!updatedInfo) throw "Error: Insert failed!";
+    if (!updatedInfo) throw { message: "Error: Insert failed!" };
     return updatedInfo;
   },
 

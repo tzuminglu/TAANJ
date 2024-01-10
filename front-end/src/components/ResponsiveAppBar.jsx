@@ -17,6 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { AuthContext } from "../contexts/AuthContext";
 import { doSignOut } from "../firecase/FirebaseFunction";
 
+import admin from "../../public/CurrentUser/admin.jpeg";
 
 const pages = ["Home", "About", "Members", "Photos"];
 
@@ -145,7 +146,7 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="admin" src="http://tinyurl.com/mpmxxfsz" />
+                  <Avatar alt="admin" src={admin} />
                 </IconButton>
               </Tooltip>
               <Menu
