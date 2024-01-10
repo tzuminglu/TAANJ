@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import ErrorText from "../../General/ErrorText";
 import useUploadImage from "../../../hooks/useUploadImage";
@@ -6,7 +6,7 @@ import useUploadImage from "../../../hooks/useUploadImage";
 import dayjs from "dayjs";
 import axiosClient from "../../../axios/config";
 
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { PhotoIcon } from "@heroicons/react/24/solid";
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

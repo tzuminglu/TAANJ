@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import ErrorText from "../General/ErrorText";
 
@@ -17,7 +17,6 @@ function UpcomingEvent() {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(data);
 
   return (
     <div>

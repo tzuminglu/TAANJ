@@ -29,6 +29,7 @@ router.post("/admin/upcomingevent/create", cors(), async (req, res) => {
     link1,
     link2,
   } = req.body;
+  console.log(startValue, endValue);
   const newPost = await upcomingEventFn.addPost(
     name,
     description,
