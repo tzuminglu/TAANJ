@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import noImage from "../../assets/no-image.png";
+
 import ErrorText from "../General/ErrorText";
 
 import useFetchData from "../../hooks/useFetchData";
@@ -23,7 +25,10 @@ function UpcomingEvent() {
       {!fetching && data && data.post && (
         <div className="card lg:card-side shadow-xl">
           <figure className="w-full">
-            <img src={`${data.post.photo}`} alt="Album" />
+            <img
+              src={`${data.post.photo ? data.post.photo : noImage}`}
+              alt="img"
+            />
           </figure>
           <div className="card-body">
             <h2 className="card-title">{data.post.name}</h2>
@@ -35,14 +40,16 @@ function UpcomingEvent() {
               {data.post.startValue
                 .replace("T", " ")
                 .replace(/-/g, "/")
-                .slice(0, -3)} (ET)
+                .slice(0, -3)}{" "}
+              (ET)
             </p>
             <p>
               End Time:&nbsp;
               {data.post.endValue
                 .replace("T", " ")
                 .replace(/-/g, "/")
-                .slice(0, -3)}&nbsp;(ET)
+                .slice(0, -3)}
+              &nbsp;(ET)
             </p>
             <p>Location:&nbsp;{data.post.location}</p>
             Information:&nbsp;

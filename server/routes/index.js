@@ -1,10 +1,13 @@
 import upcomingeventRoutes from "./upcomingEvent.js";
+import aboutRoutes from "./about.js"
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 const constructorMethod = (app) => {
   app.use("/", upcomingeventRoutes);
+  app.use("/", aboutRoutes);
+
 
   app.use("*", (req, res) => {
     // res.sendFile(

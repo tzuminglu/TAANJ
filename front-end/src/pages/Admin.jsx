@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import CreateForm from "../components/Admin/UpcomingEvent/CreateForm";
 import UpdateForm from "../components/Admin/UpcomingEvent/UpdateForm";
+import CreateOrgForm from "../components/Admin/About/Org/CreateOrgForm";
 
 function Admin() {
   //   const [showHomeDropdown, setShowHomeDropdown] = useState(false);
@@ -41,7 +42,7 @@ function Admin() {
     memberDropdown: false,
     pastEventDropdown: false,
     photosDropdown: false,
-    aboutDropdown:false,
+    aboutDropdown: false,
     formType: null,
   };
 
@@ -117,7 +118,6 @@ function Admin() {
                     </ul>
                   )}
                 </li>
-                
               </ul>
             )}
           </li>
@@ -133,12 +133,12 @@ function Admin() {
             </a>
             {state.aboutDropdown && (
               <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
-                {/* <li onClick={() => showForm("createUpcomingEvent")}>
-                  <a>Add New Member</a>
+                <li onClick={() => showForm("createOrg")}>
+                  <a>Add New Organization</a>
                 </li>
                 <li onClick={() => showForm("updateUpcomingEvent")}>
                   <a>Update Member</a>
-                </li> */}
+                </li>
               </ul>
             )}
           </li>
@@ -186,6 +186,7 @@ function Admin() {
       </div>
       {state.formType === "createUpcomingEvent" && <CreateForm />}
       {state.formType === "updateUpcomingEvent" && <UpdateForm />}
+      {state.formType === "createOrg" && <CreateOrgForm />}
     </div>
   );
 }

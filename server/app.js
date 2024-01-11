@@ -29,13 +29,17 @@ app.get("/", async (req, res) => {
   res.json("Hello World! 123");
 });
 
+app.use("/", async (req, res, next) => {
+  next();
+});
+
 // routes for admin upcoming event
 app.use("/admin/upcomingevent", async (req, res, next) => {
   next();
 });
 
-// routes for upcoming event
-app.use("/", async (req, res, next) => {
+// routes for admin about
+app.use("/admin/about", async (req, res, next) => {
   next();
 });
 
