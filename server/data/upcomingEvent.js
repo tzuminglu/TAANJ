@@ -109,12 +109,24 @@ const exportedMethods = {
     return updatedInfo;
   },
 
+  async deletePost() {
+    let _id = "0";
+    const upcomingEventCollection = await upcomingEvent();
+    let deletedInfo = await upcomingEventCollection.findOneAndDelete({ _id });
+    if (!deletedInfo) throw "Bad request";
+    return deletedInfo;
+  },
+
   async getPostById(id) {
     let _id = id;
     const upcomingEventCollection = await upcomingEvent();
-    const post = await upcomingEventCollection.findOne({ _id });
+    const post = await upcomingEventCollection
+      .findOne({ _id })
+      .catch((error) => {
+        console.log(error);
+        error.message;
+      });
 
-    if (!post) throw "Error: Post not found";
     return post;
   },
 };

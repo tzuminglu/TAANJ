@@ -18,6 +18,7 @@ const validImageTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
 
 const imageURL = "/admin/upcomingevent/imageupload";
 const formURL = "/admin/upcomingevent/update";
+const deleteURL = "/admin/upcomingevent/delete";
 const dataURL = "/upcomingevent";
 
 function UpdateForm() {
@@ -98,13 +99,35 @@ function UpdateForm() {
 
       if (response.status === 200) {
         alert("The event has been successfully updated!");
+        resetForm();
         navigate("/");
       } else {
         alert("Failed to create event. Please try again.");
       }
     } catch (error) {
-      console.error("Error creating event:", error);
       alert("An error occurred while creating the event. Please try again.");
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+
+    if (isConfirmed) {
+      await axiosClient({
+        url: deleteURL,
+        method: "DELETE",
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            alert("The event has been successfully deleted!");
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     }
   };
 
@@ -119,7 +142,7 @@ function UpdateForm() {
 
   return (
     <>
-      {post && (
+      {post ? (
         <div className="flex items-center justify-center h-full bg-white">
           <form className="w-full max-w-md" onSubmit={handleSubmit}>
             <div className="space-y-12">
@@ -388,9 +411,19 @@ function UpdateForm() {
               >
                 Save
               </button>
+              <button
+                onClick={handleDeleteClick}
+                className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+              >
+                Delete
+              </button>
             </div>
           </form>
         </div>
+      ) : (
+        <h1 className="text-center text-xl font-mono text-red-600">
+          Please create a post before attempting to update.
+        </h1>
       )}
     </>
   );

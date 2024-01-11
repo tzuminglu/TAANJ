@@ -20,7 +20,7 @@ function UpcomingEvent() {
 
   return (
     <div>
-      {!fetching && data && (
+      {!fetching && data && data.post && (
         <div className="card lg:card-side shadow-xl">
           <figure className="w-full">
             <img src={`${data.post.photo}`} alt="Album" />

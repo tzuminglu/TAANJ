@@ -11,10 +11,13 @@ const router = Router();
 
 router.get("/upcomingevent", cors(), async (req, res) => {
   console.log("I'm in /upcomingevent");
-  const post = await upcomingEventFn.getPostById("0");
-  if (!post) return res.status(400).json({ message: "Bad request" });
-
-  res.status(200).json({ post, message: "Test is successful" });
+  try {
+    const post = await upcomingEventFn.getPostById("0");
+    res.status(200).json({ post: post, success: "Successful fetch data" });
+  } catch (error) {
+    console.log(123, error);
+    res.status(400).json({ error: error.message });
+  }
 });
 
 router.post("/admin/upcomingevent/create", cors(), async (req, res) => {
@@ -29,19 +32,22 @@ router.post("/admin/upcomingevent/create", cors(), async (req, res) => {
     link1,
     link2,
   } = req.body;
-  console.log(startValue, endValue);
-  const newPost = await upcomingEventFn.addPost(
-    name,
-    description,
-    startValue,
-    endValue,
-    location,
-    uploadImageURL,
-    link1,
-    link2
-  );
 
-  res.status(200).json({ success: "Test is successful" });
+  try {
+    const result = await upcomingEventFn.addPost(
+      name,
+      description,
+      startValue,
+      endValue,
+      location,
+      uploadImageURL,
+      link1,
+      link2
+    );
+    res.status(200).json({ success: "Successfully created event!" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 router.post(
@@ -51,9 +57,10 @@ router.post(
   async (req, res) => {
     console.log("I'm in /admin/upcomingevent/imageupload");
     const { file } = req;
+    const folder = "upcomingevent/"; // aws folder
     if (!file) return res.status(400).json({ message: "Bad request" });
 
-    const { error, url } = await uploadFileToS3(file);
+    const { error, url } = await uploadFileToS3(folder, file);
     if (error) return res.status(500).json({ message: error.message });
     return res.status(200).json({ url });
   }
@@ -72,8 +79,8 @@ router.patch("/admin/upcomingevent/update", cors(), async (req, res) => {
     link2,
   } = req.body;
 
-  const updatedPost = await upcomingEventFn
-    .updatePost(
+  try {
+    const updatedPost = await upcomingEventFn.updatePost(
       name,
       description,
       startValue,
@@ -82,12 +89,24 @@ router.patch("/admin/upcomingevent/update", cors(), async (req, res) => {
       uploadImageURL,
       link1,
       link2
-    )
-    .catch((error) => {
-      res.status(400).json({ error: error.message });
+    );
+    res.status(200).json({
+      updatedPost,
+      success: "Test is successful",
     });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
-  res.status(200).json({ success: "Test is successful" });
+router.delete("/admin/upcomingevent/delete", cors(), async (req, res) => {
+  console.log("I'm in /admin/upcomingevent/delete");
+  try {
+    const deletedInfo = await upcomingEventFn.deletePost();
+    res.status(200).json({ deletedInfo });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 export default router;

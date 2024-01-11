@@ -4,60 +4,135 @@ import CreateForm from "../components/Admin/UpcomingEvent/CreateForm";
 import UpdateForm from "../components/Admin/UpcomingEvent/UpdateForm";
 
 function Admin() {
-  const [showUpcomingEventDropdown, setShowUpcomingEventDropdown] =
-    useState(false);
-  const [showMemberDropdown, setShowMemberDropdown] = useState(false);
-  const [showPastEventDropdown, setShowPastEventDropdown] = useState(false);
-  const [showPhotos, setShowPhotos] = useState(false);
-  const [showFormType, setShowFormType] = useState(null);
+  //   const [showHomeDropdown, setShowHomeDropdown] = useState(false);
+  //   const [showUpcomingEventDropdown, setShowUpcomingEventDropdown] =
+  //     useState(false);
+  //   const [showMemberDropdown, setShowMemberDropdown] = useState(false);
+  //   const [showPastEventDropdown, setShowPastEventDropdown] = useState(false);
+  //   const [showPhotos, setShowPhotos] = useState(false);
+  //   const [showFormType, setShowFormType] = useState(null);
 
-  const toggleUpcomingChildDropdown = () => {
-    setShowUpcomingEventDropdown(!showUpcomingEventDropdown);
+  //   const toggleHomeChildDropdown = () => {
+  //     setShowHomeDropdown(!showHomeDropdown);
+  //   };
+  //   const toggleUpcomingChildDropdown = (e) => {
+  //     e.stopPropagation();
+  //     setShowUpcomingEventDropdown(!showUpcomingEventDropdown);
+  //   };
+  //   const togglePastChildDropdown = (e) => {
+  //     e.stopPropagation();
+  //     setShowPastEventDropdown(!showPastEventDropdown);
+  //   };
+  //   const togglePhotosChildDropdown = (e) => {
+  //     e.stopPropagation();
+  //     setShowPhotos(!showPhotos);
+  //   };
+
+  //   const toggleMemberChildDropdown = () => {
+  //     setShowMemberDropdown(!showMemberDropdown);
+  //   };
+
+  //   const showForm = (formType) => {
+  //     setShowFormType(formType);
+  //   };
+  const initialState = {
+    homeDropdown: false,
+    upcomingEventDropdown: false,
+    memberDropdown: false,
+    pastEventDropdown: false,
+    photosDropdown: false,
+    aboutDropdown:false,
+    formType: null,
   };
-  const toggleMemberChildDropdown = () => {
-    setShowMemberDropdown(!showMemberDropdown);
-  };
-  const togglePastChildDropdown = () => {
-    setShowPastEventDropdown(!showPastEventDropdown);
-  };
-  const togglePhotosChildDropdown = () => {
-    setShowPhotos(!showPhotos);
+
+  const [state, setState] = useState(initialState);
+
+  const toggleDropdown = (dropdownName, e) => {
+    e.stopPropagation();
+    setState((prevState) => ({
+      ...prevState,
+      [dropdownName]: !prevState[dropdownName],
+    }));
   };
 
   const showForm = (formType) => {
-    setShowFormType(formType);
+    setState({ ...initialState, formType });
   };
 
   return (
     <div>
       <div className="dropdown dropdown-hover">
-        <div tabIndex={0} role="button" className="btn m-1">
-          Hover
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-outline btn-info m-1"
+        >
+          Action
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-64"
         >
-          <li onClick={toggleUpcomingChildDropdown}>
-            <a>Upcoming Event &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &gt;</a>
-            {showUpcomingEventDropdown && (
-              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-52">
-                <li onClick={() => showForm("createUpcomingEvent")}>
-                  <a>Add New Event</a>
+          <li onClick={(e) => toggleDropdown("homeDropdown", e)}>
+            <a className="flex justify-between">
+              Home
+              <span>&gt;</span>
+            </a>
+
+            {state.homeDropdown && (
+              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+                <li onClick={(e) => toggleDropdown("upcomingEventDropdown", e)}>
+                  <a className="flex justify-between">
+                    Upcoming Event
+                    <span>&gt;</span>
+                  </a>
+                  {state.upcomingEventDropdown && (
+                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-40">
+                      <li onClick={() => showForm("createUpcomingEvent")}>
+                        <a>Add New Event</a>
+                      </li>
+                      <li onClick={() => showForm("updateUpcomingEvent")}>
+                        <a>Update Event Info.</a>
+                      </li>
+                    </ul>
+                  )}
                 </li>
-                <li onClick={() => showForm("updateUpcomingEvent")}>
-                  <a>Update Event Information</a>
+                <li
+                  onClick={(e) => {
+                    toggleDropdown("pastEventDropdown", e);
+                  }}
+                >
+                  <a className="flex justify-between">
+                    Past Event
+                    <span>&gt;</span>
+                  </a>
+                  {state.pastEventDropdown && (
+                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-40">
+                      <li>
+                        <a>Event 1</a>
+                      </li>
+                      <li>
+                        <a>Event 2</a>
+                      </li>
+                    </ul>
+                  )}
                 </li>
+                
               </ul>
             )}
           </li>
-          <li onClick={toggleMemberChildDropdown}>
-            <a>
-              Members &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&gt;
+
+          <li
+            onClick={(e) => {
+              toggleDropdown("aboutDropdown", e);
+            }}
+          >
+            <a className="flex justify-between">
+              About
+              <span>&gt;</span>
             </a>
-            {showMemberDropdown && (
-              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-52">
+            {state.aboutDropdown && (
+              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
                 {/* <li onClick={() => showForm("createUpcomingEvent")}>
                   <a>Add New Member</a>
                 </li>
@@ -67,44 +142,50 @@ function Admin() {
               </ul>
             )}
           </li>
-          <li onClick={togglePastChildDropdown}>
-            <a>
-              Past Event &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &gt;
+          <li
+            onClick={(e) => {
+              toggleDropdown("memberDropdown", e);
+            }}
+          >
+            <a className="flex justify-between">
+              Members
+              <span>&gt;</span>
             </a>
-            {showPastEventDropdown && (
-              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-52">
-                <li>
-                  <a>Event 1</a>
+            {state.memberDropdown && (
+              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+                {/* <li onClick={() => showForm("createUpcomingEvent")}>
+                  <a>Add New Member</a>
                 </li>
-                <li>
-                  <a>Event 2</a>
-                </li>
+                <li onClick={() => showForm("updateUpcomingEvent")}>
+                  <a>Update Member</a>
+                </li> */}
               </ul>
             )}
           </li>
-          <li onClick={togglePhotosChildDropdown}>
-            <a>
-              Photos &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &gt;
+          <li
+            onClick={(e) => {
+              toggleDropdown("photosDropdown", e);
+            }}
+          >
+            <a className="flex justify-between">
+              Photos
+              <span>&gt;</span>
             </a>
-            {showPhotos && (
-              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-52">
-                <li>
-                  <a>Event 1</a>
+            {state.photosDropdown && (
+              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+                {/* <li onClick={() => showForm("createUpcomingEvent")}>
+                  <a>Add New Member</a>
                 </li>
-                <li>
-                  <a>Event 2</a>
-                </li>
+                <li onClick={() => showForm("updateUpcomingEvent")}>
+                  <a>Update Member</a>
+                </li> */}
               </ul>
             )}
           </li>
         </ul>
       </div>
-      {showFormType === "createUpcomingEvent" && <CreateForm />}
-      {showFormType === "updateUpcomingEvent" && <UpdateForm />}
+      {state.formType === "createUpcomingEvent" && <CreateForm />}
+      {state.formType === "updateUpcomingEvent" && <UpdateForm />}
     </div>
   );
 }

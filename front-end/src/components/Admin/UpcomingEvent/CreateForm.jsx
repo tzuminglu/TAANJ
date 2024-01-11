@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ErrorText from "../../General/ErrorText";
 import useUploadImage from "../../../hooks/useUploadImage";
@@ -19,6 +20,7 @@ const imageURL = "/admin/upcomingevent/imageupload";
 const formURL = "/admin/upcomingevent/create";
 
 function CreateForm() {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -89,6 +91,7 @@ function CreateForm() {
       if (response.status === 200) {
         alert("Event created successfully!");
         resetForm();
+        navigate("/");
       } else {
         alert("Failed to create event. Please try again.");
       }
