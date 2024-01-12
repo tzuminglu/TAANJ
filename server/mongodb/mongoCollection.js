@@ -13,6 +13,6 @@ const getCollectionFn = (collection) => {
   };
 };
 
-
 export const upcomingEvent = getCollectionFn("upcomingEvent");
-export const about = getCollectionFn("about")
+export const organization = getCollectionFn("organization");
+export const sponsor = getCollectionFn("sponsor");

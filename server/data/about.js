@@ -1,24 +1,26 @@
-import { about } from "../mongodb/mongoCollection.js";
+import { organization, sponsor } from "../mongodb/mongoCollection.js";
 import { ObjectId } from "mongodb";
 
 const exportedMethods = {
+  // organization
+
   /**
    *
    * @param {object} affair
    */
-  async addorg(organization) {
-    const aboutCollection = await about();
+  async addorg(org) {
+    const organizationCollection = await organization();
     try {
-      await aboutCollection.insertOne(organization);
+      await organizationCollection.insertOne(org);
     } catch (error) {
       throw "Unable to add this organization";
     }
   },
 
   async getAllOrg() {
-    const aboutCollection = await about();
+    const organizationCollection = await organization();
     try {
-      const orgs = await aboutCollection.find({}).toArray();
+      const orgs = await organizationCollection.find({}).toArray();
       return orgs;
     } catch (error) {
       throw "Request Not found";
@@ -31,9 +33,9 @@ const exportedMethods = {
    * @returns
    */
   async getOrgById(_id) {
-    const aboutCollection = await about();
+    const organizationCollection = await organization();
     try {
-      return await aboutCollection.findOne({ _id });
+      return await organizationCollection.findOne({ _id: new ObjectId(_id) });
     } catch (error) {
       throw "Request Not found";
     }
@@ -46,10 +48,10 @@ const exportedMethods = {
    * @returns
    */
   async updateOrgById(id, newOrg) {
-    const aboutCollection = await about();
+    const organizationCollection = await organization();
     const { _id, ...updateOrg } = newOrg;
     try {
-      const updateInfo = await aboutCollection.findOneAndReplace(
+      const updateInfo = await organizationCollection.findOneAndReplace(
         { _id: new ObjectId(id) },
         updateOrg,
         { returnDocument: "after" }
@@ -61,13 +63,49 @@ const exportedMethods = {
   },
 
   async deleteOrgById(_id) {
-    const aboutCollection = await about();
+    const organizationCollection = await organization();
     try {
-      return await aboutCollection.findOneAndDelete({ _id: new ObjectId(_id) });
+      return await organizationCollection.findOneAndDelete({
+        _id: new ObjectId(_id),
+      });
     } catch (error) {
       throw "Deletion failed";
     }
   },
+
+  // sponsor
+  async addsponsor(sponsorData) {
+    const sponsorCollection = await sponsor();
+    try {
+      return await sponsorCollection.insertOne(sponsorData);
+    } catch (error) {
+      throw "Unable to add this sponsor";
+    }
+  },
+
+  async getAllSponsors() {
+    const sponsorCollection = await sponsor();
+    try {
+      const sponsors = await sponsorCollection.find({}).toArray();
+      return sponsors;
+    } catch (error) {
+      throw "Unable to get the sponsors";
+    }
+  },
+
+  async getSponsorById(_id) {
+    const sponsorCollection = await sponsor();
+    try {
+      const sponsors = await sponsorCollection.findOne({
+        _id: new ObjectId(_id),
+      });
+      return sponsors;
+    } catch (error) {
+      throw "Unable to get the sponsors";
+    }
+  },
+
+  
 };
 
 export default exportedMethods;

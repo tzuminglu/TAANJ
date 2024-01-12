@@ -82,7 +82,7 @@ function UpdateOrgForm({ org }) {
 
   const handleDeleteClick = async () => {
     const isConfirmed = window.confirm(
-      "Are you sure you want to delete this post?"
+      "Are you sure you want to delete this organization?"
     );
 
     if (isConfirmed) {
@@ -93,7 +93,7 @@ function UpdateOrgForm({ org }) {
       })
         .then((res) => {
           if (res.status === 200) {
-            alert("The event has been successfully deleted!");
+            alert("The organization has been successfully deleted!");
             navigate("/about");
           }
         })

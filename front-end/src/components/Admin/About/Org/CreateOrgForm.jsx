@@ -80,7 +80,7 @@ function CreateOrgForm() {
       }
     } catch (error) {
       console.error("Error creating organiztion:", error);
-      alert("An error occurred while creating the event. Please try again.");
+      alert("An error occurred while creating the organization. Please try again.");
     }
   };
 
@@ -99,7 +99,7 @@ function CreateOrgForm() {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
                 <label
-                  htmlFor="event-name"
+                  htmlFor="organization-name"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Organization Name
@@ -108,15 +108,15 @@ function CreateOrgForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
                       type="text"
-                      name="event-name"
-                      id="event-name"
+                      name="organization-name"
+                      id="organization-name"
                       value={state.name}
                       onChange={(e) => {
                         setState({ ...state, name: e.target.value });
                       }}
-                      autoComplete="event-name"
+                      autoComplete="organization-name"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Event Name"
+                      placeholder="Organization Name"
                       required
                     />
                   </div>
@@ -125,15 +125,15 @@ function CreateOrgForm() {
 
               <div className="col-span-full">
                 <label
-                  htmlFor="event-description"
+                  htmlFor="organization-description"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Brief Introduction to the Organization
                 </label>
                 <div className="mt-2">
                   <textarea
-                    id="event-description"
-                    name="event-description"
+                    id="organization-description"
+                    name="organization-description"
                     onChange={(e) => {
                       setState({ ...state, description: e.target.value });
                     }}

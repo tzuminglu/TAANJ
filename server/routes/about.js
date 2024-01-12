@@ -27,7 +27,7 @@ router.post("/admin/about/organization/create", cors(), async (req, res) => {
 
   try {
     const result = await aboutFn.addorg(newOrg);
-    res.status(200).json({ result, success: "Successfully created event!" });
+    res.status(200).json({ result, success: "Successfully created organization!" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -77,11 +77,23 @@ router.delete("/admin/about/organization/delete", cors(), async (req, res) => {
 router.get("/about/sponsor", cors(), async (req, res) => {
   console.log("I'm in /about/sponsor");
   try {
-    const sponsors = await aboutFn.getAllOrg();
+    const sponsors = await aboutFn.getAllSponsors();
     res.status(200).json({ sponsors });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
+
+router.post("/admin/about/sponsor/create", cors(), async (req, res) => {
+    console.log("I'm in /admin/about/sponsor/create");
+    const newSponsor = req.body;
+  
+    try {
+      const result = await aboutFn.addsponsor(newSponsor);
+      res.status(200).json({ result, success: "Successfully created sponsor!" });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  });
 
 export default router;
