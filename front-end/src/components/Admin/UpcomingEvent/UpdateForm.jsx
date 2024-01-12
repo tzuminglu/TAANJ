@@ -63,6 +63,8 @@ function UpdateForm() {
       setError("File must be JPG/PNG/GIF format");
     } else if (file.size > 1000000) {
       alert("Image size is greater than 10MB");
+    } else if (!file) {
+      return;
     } else {
       setImage(file);
       const form = new FormData();

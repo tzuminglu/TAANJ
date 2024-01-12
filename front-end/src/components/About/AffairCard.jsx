@@ -11,7 +11,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-function AffairCard({ affair }) {
+function AffairCard({ org }) {
   const stringLength = 165;
 
   const [windowSize, setWindowSize] = useState({
@@ -46,12 +46,11 @@ function AffairCard({ affair }) {
       >
         <CardMedia
           sx={{
-            minHeight: "60%",
-            maxHeight: "60%",
-            minWidth: "50%",
-            maxWidth: "50%",
+            width: "30%",
+            height: "300px",
+            objectFit: "cover",
           }}
-          image={noImage}
+          image={org && org.imageURL ? org.imageURL : noImage}
           title="org"
         />
         <CardContent>
@@ -61,7 +60,7 @@ function AffairCard({ affair }) {
             component="div"
             sx={{ fontFamily: "monospace" }}
           >
-            {affair && affair.name}
+            {org && org.name}
           </Typography>
           {windowSize && windowSize.height > 450 && windowSize.width > 1240 && (
             <Typography
@@ -69,9 +68,9 @@ function AffairCard({ affair }) {
               color="text.secondary"
               sx={{ fontFamily: "monospace" }}
             >
-              {affair && affair.intro.length > stringLength
-                ? affair.intro.substring(0, stringLength) + "..."
-                : affair.intro}
+              {org && org.description.length > stringLength
+                ? org.description.substring(0, stringLength) + "..."
+                : org.description}
             </Typography>
           )}
         </CardContent>
@@ -84,8 +83,8 @@ function AffairCard({ affair }) {
             marginTop: "auto",
           }}
         >
-          {affair && (
-            <Button href={`${affair.address}`} target="_blank" size="small">
+          {org && (
+            <Button href={`${org.link1}`} target="_blank" size="small">
               About
             </Button>
           )}

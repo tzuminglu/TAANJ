@@ -3,39 +3,9 @@ import React, { useState } from "react";
 import CreateForm from "../components/Admin/UpcomingEvent/CreateForm";
 import UpdateForm from "../components/Admin/UpcomingEvent/UpdateForm";
 import CreateOrgForm from "../components/Admin/About/Org/CreateOrgForm";
+import UpdateOrgPage from "../components/Admin/About/Org/UpdateOrgPage";
 
 function Admin() {
-  //   const [showHomeDropdown, setShowHomeDropdown] = useState(false);
-  //   const [showUpcomingEventDropdown, setShowUpcomingEventDropdown] =
-  //     useState(false);
-  //   const [showMemberDropdown, setShowMemberDropdown] = useState(false);
-  //   const [showPastEventDropdown, setShowPastEventDropdown] = useState(false);
-  //   const [showPhotos, setShowPhotos] = useState(false);
-  //   const [showFormType, setShowFormType] = useState(null);
-
-  //   const toggleHomeChildDropdown = () => {
-  //     setShowHomeDropdown(!showHomeDropdown);
-  //   };
-  //   const toggleUpcomingChildDropdown = (e) => {
-  //     e.stopPropagation();
-  //     setShowUpcomingEventDropdown(!showUpcomingEventDropdown);
-  //   };
-  //   const togglePastChildDropdown = (e) => {
-  //     e.stopPropagation();
-  //     setShowPastEventDropdown(!showPastEventDropdown);
-  //   };
-  //   const togglePhotosChildDropdown = (e) => {
-  //     e.stopPropagation();
-  //     setShowPhotos(!showPhotos);
-  //   };
-
-  //   const toggleMemberChildDropdown = () => {
-  //     setShowMemberDropdown(!showMemberDropdown);
-  //   };
-
-  //   const showForm = (formType) => {
-  //     setShowFormType(formType);
-  //   };
   const initialState = {
     homeDropdown: false,
     upcomingEventDropdown: false,
@@ -43,7 +13,10 @@ function Admin() {
     pastEventDropdown: false,
     photosDropdown: false,
     aboutDropdown: false,
+    organizationDropdown: false,
+    sponsorDropdown: false,
     formType: null,
+    cardType: null,
   };
 
   const [state, setState] = useState(initialState);
@@ -58,6 +31,10 @@ function Admin() {
 
   const showForm = (formType) => {
     setState({ ...initialState, formType });
+  };
+
+  const showCard = (cardType) => {
+    setState({ ...initialState, cardType });
   };
 
   return (
@@ -132,12 +109,36 @@ function Admin() {
               <span>&gt;</span>
             </a>
             {state.aboutDropdown && (
-              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
-                <li onClick={() => showForm("createOrg")}>
-                  <a>Add New Organization</a>
+              <ul>
+                <li
+                  onClick={(e) => {
+                    toggleDropdown("organizationDropdown", e);
+                  }}
+                >
+                  <a className="flex justify-between">
+                    Organization
+                    <span>&gt;</span>
+                  </a>
+                  {state.organizationDropdown && (
+                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+                      <li onClick={() => showForm("createOrg")}>
+                        <a>Add New Organization</a>
+                      </li>
+                      <li onClick={() => showCard("updateOrg")}>
+                        <a>Update Organization</a>
+                      </li>
+                    </ul>
+                  )}
                 </li>
-                <li onClick={() => showForm("updateUpcomingEvent")}>
-                  <a>Update Member</a>
+                <li
+                  onClick={(e) => {
+                    toggleDropdown("sponsorDropdown", e);
+                  }}
+                >
+                  <a className="flex justify-between">
+                    Sponsor
+                    <span>&gt;</span>
+                  </a>
                 </li>
               </ul>
             )}
@@ -187,6 +188,7 @@ function Admin() {
       {state.formType === "createUpcomingEvent" && <CreateForm />}
       {state.formType === "updateUpcomingEvent" && <UpdateForm />}
       {state.formType === "createOrg" && <CreateOrgForm />}
+      {state.cardType === "updateOrg" && <UpdateOrgPage />}
     </div>
   );
 }

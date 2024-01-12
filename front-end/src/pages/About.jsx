@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Grid, Divider, Typography } from "@mui/material";
 
 import AffairCard from "../components/About/AffairCard";
 import SponsorCard from "../components/About/SponsorCard";
+
+import useFetchData from "../hooks/useFetchData";
 
 const affairs = [
   {
@@ -59,7 +61,21 @@ const sponsors = [
   { name: "Lin’s Palace 林宮台菜館", tele: "973-993-8668" },
 ];
 
+const orgURL = "/about/organization";
+const sponsorURL = "/about/sponsor";
+
 function About() {
+  const {
+    mutate: fetchOrg,
+    isloading: fetchingOrg,
+    error: fecthOrgError,
+    data: Orgdata,
+  } = useFetchData({ url: orgURL });
+
+  useEffect(() => {
+    fetchOrg();
+  }, []);
+
   return (
     <>
       <Typography
@@ -69,17 +85,22 @@ function About() {
       >
         More About Taiwan
       </Typography>
-      <Grid
-        container
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-        rowSpacing={1}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-      >
-        {affairs &&
-          affairs.map((affair) => {
-            return <AffairCard key={affair.name} affair={affair} />;
+      {!fetchingOrg && Orgdata && (
+        <Grid
+          container
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          rowSpacing={1}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        >
+          {Orgdata.orgs.map((org) => {
+            return <AffairCard key={org._id} org={org} />;
           })}
-      </Grid>
+        </Grid>
+      )}
       <Divider sx={{ marginY: 3 }} />
       <Typography
         textAlign="center"
