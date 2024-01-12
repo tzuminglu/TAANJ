@@ -55,10 +55,10 @@ function UpdateOrgForm({ org }) {
         resetForm();
         navigate("/about");
       } else {
-        alert("Failed to create event. Please try again.");
+        alert("Failed to update the organization. Please try again.");
       }
     } catch (error) {
-      alert("An error occurred while creating the event. Please try again.");
+      alert("An error occurred while updating the organization. Please try again.");
     }
   };
 
@@ -131,7 +131,7 @@ function UpdateOrgForm({ org }) {
                         type="text"
                         name="organization-name"
                         id="organization-name"
-                        value={org ? org.name : ""}
+                        value={state ? state.name : ""}
                         onChange={(e) => {
                           setState((prevPost) => ({
                             ...prevPost,
@@ -167,7 +167,7 @@ function UpdateOrgForm({ org }) {
                       wrap="hard"
                       rows={5}
                       className="block w-full bg-transparent rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      value={org ? org.description : ""}
+                      value={state ? state.description : ""}
                       placeholder=" Describe the organization"
                     />
                   </div>
@@ -233,7 +233,7 @@ function UpdateOrgForm({ org }) {
                       name="link1"
                       type="text"
                       autoComplete="link1"
-                      value={org ? org.link1 : ""}
+                      value={state ? state.link1 : ""}
                       onChange={(e) => {
                         setState((prevPost) => ({
                           ...prevPost,

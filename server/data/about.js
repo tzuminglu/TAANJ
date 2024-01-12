@@ -25,6 +25,11 @@ const exportedMethods = {
     }
   },
 
+  /**
+   *
+   * @param {string} _id
+   * @returns
+   */
   async getOrgById(_id) {
     const aboutCollection = await about();
     try {
@@ -34,12 +39,19 @@ const exportedMethods = {
     }
   },
 
-  async updateOrgById(_id, newOrg) {
+  /**
+   *
+   * @param {string} _id
+   * @param {object} newOrg
+   * @returns
+   */
+  async updateOrgById(id, newOrg) {
     const aboutCollection = await about();
+    const { _id, ...updateOrg } = newOrg;
     try {
-      const updateInfo = await aboutCollection.findOneAndUpdate(
-        { _id },
-        { $set: { newOrg } },
+      const updateInfo = await aboutCollection.findOneAndReplace(
+        { _id: new ObjectId(id) },
+        updateOrg,
         { returnDocument: "after" }
       );
       return updateInfo;

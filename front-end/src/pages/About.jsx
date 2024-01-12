@@ -72,8 +72,16 @@ function About() {
     data: Orgdata,
   } = useFetchData({ url: orgURL });
 
+  const {
+    mutate: fetchSponsor,
+    isloading: fetchingSponsor,
+    error: fecthSponsorError,
+    data: Sponsordata,
+  } = useFetchData({ url: sponsorURL });
+
   useEffect(() => {
     fetchOrg();
+    fetchSponsor()
   }, []);
 
   return (

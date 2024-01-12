@@ -9,6 +9,8 @@ const upload = multer({ storage });
 
 const router = Router();
 
+// organization
+
 router.get("/about/organization", cors(), async (req, res) => {
   console.log("I'm in /about/organization");
   try {
@@ -21,7 +23,6 @@ router.get("/about/organization", cors(), async (req, res) => {
 
 router.post("/admin/about/organization/create", cors(), async (req, res) => {
   console.log("I'm in /admin/about/organization/create");
-  console.log(req.body);
   const newOrg = req.body;
 
   try {
@@ -53,7 +54,7 @@ router.patch("/admin/about/organization/update", cors(), async (req, res) => {
   if (!req.body) return res.status(400).json({ message: "Bad request" });
 
   try {
-    const organization = await aboutFn.updateOrgById(req.body._id);
+    const organization = await aboutFn.updateOrgById(req.body._id, req.body);
     return res.status(200).json({ organization });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -68,6 +69,18 @@ router.delete("/admin/about/organization/delete", cors(), async (req, res) => {
     return res.status(200).json({ organization });
   } catch (error) {
     return res.status(400).json({ message: error.message });
+  }
+});
+
+// sponsor
+
+router.get("/about/sponsor", cors(), async (req, res) => {
+  console.log("I'm in /about/sponsor");
+  try {
+    const sponsors = await aboutFn.getAllOrg();
+    res.status(200).json({ sponsors });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 });
 
