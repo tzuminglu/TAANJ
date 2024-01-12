@@ -27,7 +27,9 @@ router.post("/admin/about/organization/create", cors(), async (req, res) => {
 
   try {
     const result = await aboutFn.addorg(newOrg);
-    res.status(200).json({ result, success: "Successfully created organization!" });
+    res
+      .status(200)
+      .json({ result, success: "Successfully created organization!" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -85,15 +87,38 @@ router.get("/about/sponsor", cors(), async (req, res) => {
 });
 
 router.post("/admin/about/sponsor/create", cors(), async (req, res) => {
-    console.log("I'm in /admin/about/sponsor/create");
-    const newSponsor = req.body;
-  
-    try {
-      const result = await aboutFn.addsponsor(newSponsor);
-      res.status(200).json({ result, success: "Successfully created sponsor!" });
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  });
+  console.log("I'm in /admin/about/sponsor/create");
+  const newSponsor = req.body;
 
+  try {
+    const result = await aboutFn.addsponsor(newSponsor);
+    res.status(200).json({ result, success: "Successfully created sponsor!" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.patch("/admin/about/sponsor/update", cors(), async (req, res) => {
+  console.log("I'm in /admin/about/sponsor/update");
+  if (!req.body) return res.status(400).json({ message: "Bad request" });
+
+  try {
+    const sponsor = await aboutFn.updateSponsorById(req.body._id, req.body);
+    return res.status(200).json({ sponsor });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete("/admin/about/sponsor/delete", cors(), async (req, res) => {
+  console.log("I'm in /admin/about/sponsor/delete");
+  if (!req.body) return res.status(400).json({ message: "Bad request" });
+
+  try {
+    const sponsor = await aboutFn.deleteSponsorById(req.body._id);
+    return res.status(200).json({ sponsor });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
 export default router;

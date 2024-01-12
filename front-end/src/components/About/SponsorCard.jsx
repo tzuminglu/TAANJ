@@ -37,7 +37,7 @@ function SponsorCard({ sponsor }) {
                 gutterBottom
                 sx={{ fontFamily: "monospace", textAlign: "center" }}
               >
-                {sponsor && sponsor.tele}
+                {sponsor && sponsor.phone}
               </Typography>
             </Grid>
           </Grid>

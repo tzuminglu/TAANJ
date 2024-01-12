@@ -105,7 +105,37 @@ const exportedMethods = {
     }
   },
 
-  
+  /**
+   *
+   * @param {string} id
+   * @param {object} newOrg
+   * @returns
+   */
+  async updateSponsorById(id, newSponsor) {
+    const sponsorCollection = await sponsor();
+    const { _id, ...updateSponsor } = newSponsor;
+    try {
+      const updateInfo = await sponsorCollection.findOneAndReplace(
+        { _id: new ObjectId(id) },
+        updateSponsor,
+        { returnDocument: "after" }
+      );
+      return updateInfo;
+    } catch (error) {
+      throw "Update failed";
+    }
+  },
+
+  async deleteSponsorById(_id) {
+    const sponsorCollection = await sponsor();
+    try {
+      return await sponsorCollection.findOneAndDelete({
+        _id: new ObjectId(_id),
+      });
+    } catch (error) {
+      throw "Deletion failed";
+    }
+  },
 };
 
 export default exportedMethods;

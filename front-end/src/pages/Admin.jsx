@@ -5,6 +5,7 @@ import UpdateForm from "../components/Admin/UpcomingEvent/UpdateForm";
 import CreateOrgForm from "../components/Admin/About/Org/CreateOrgForm";
 import UpdateOrgPage from "../components/Admin/About/Org/UpdateOrgPage";
 import CreateSponsorForm from "../components/Admin/About/Sponsors/CreateSponsorForm";
+import UpdateSponsorPage from "../components/Admin/About/Sponsors/UpdateSponsorPage";
 
 function Admin() {
   const initialState = {
@@ -145,9 +146,9 @@ function Admin() {
                       <li onClick={() => showForm("createSponsor")}>
                         <a>Add New Sponsor</a>
                       </li>
-                      {/* <li onClick={() => showCard("updateOrg")}>
-                        <a>Update Organization</a>
-                      </li> */}
+                      <li onClick={() => showCard("updateSponsor")}>
+                        <a>Update Sponsor</a>
+                      </li>
                     </ul>
                   )}
                 </li>
@@ -201,6 +202,7 @@ function Admin() {
       {state.formType === "createOrg" && <CreateOrgForm />}
       {state.formType === "createSponsor" && <CreateSponsorForm />}
       {state.cardType === "updateOrg" && <UpdateOrgPage />}
+      {state.cardType === "updateSponsor" && <UpdateSponsorPage />}
     </div>
   );
 }

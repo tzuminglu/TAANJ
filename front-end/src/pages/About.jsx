@@ -4,6 +4,7 @@ import { Grid, Divider, Typography } from "@mui/material";
 
 import AffairCard from "../components/About/AffairCard";
 import SponsorCard from "../components/About/SponsorCard";
+import ErrorText from "../components/General/ErrorText";
 
 import useFetchData from "../hooks/useFetchData";
 
@@ -81,7 +82,7 @@ function About() {
 
   useEffect(() => {
     fetchOrg();
-    fetchSponsor()
+    fetchSponsor();
   }, []);
 
   return (
@@ -117,15 +118,24 @@ function About() {
       >
         TAA-NJ Sponsors
       </Typography>
-      <Grid
-        container
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        {sponsors &&
-          sponsors.map((sponsor) => {
-            return <SponsorCard key={sponsor.name} sponsor={sponsor} />;
+      {!fetchingSponsor && Sponsordata && (
+        <Grid
+          container
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          rowSpacing={1}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        >
+          {Sponsordata.sponsors.map((sponsor) => {
+            return <SponsorCard key={sponsor._id} sponsor={sponsor} />;
           })}
-      </Grid>
+        </Grid>
+      )}
+      {fecthOrgError && <ErrorText>{fecthOrgError}</ErrorText>}
+      {fecthSponsorError && <ErrorText>{fecthSponsorError}</ErrorText>}
     </>
   );
 }
