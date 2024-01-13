@@ -27,7 +27,7 @@ function UpdateSponsorCard({ sponsor }) {
                 </div>
                 <div className="modal-action">
                   <label htmlFor={`modal-${sponsor.name}`} className="btn">
-                    Close!
+                    Close
                   </label>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ErrorText from "../../../General/ErrorText";
@@ -10,8 +10,14 @@ const deleteURL = "/admin/about/sponsor/delete";
 
 function UpdateSponsorForm({ sponsor }) {
   const navigate = useNavigate();
-  const [state, setState] = useState(sponsor);
+  const [originalState, setOriginalState] = useState(sponsor);
+  const [formState, setFormState] = useState(sponsor);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    setOriginalState(sponsor);
+    setFormState(sponsor);
+  }, [sponsor]);
 
   //   handleSubmit
   const handleSubmit = async (e) => {
@@ -20,21 +26,19 @@ function UpdateSponsorForm({ sponsor }) {
     try {
       const response = await axiosClient({
         url: formURL,
-        data: state,
+        data: formState,
         method: "PATCH",
       });
 
       if (response.status === 200) {
         alert("The event has been successfully updated!");
-        // resetForm();
+        setOriginalState(formState); // Update original state after successful submission
         navigate("/about");
       } else {
         alert("Failed to update the sponsor. Please try again.");
       }
     } catch (error) {
-      alert(
-        "An error occurred while updating the sponsor. Please try again."
-      );
+      alert("An error occurred while updating the sponsor. Please try again.");
     }
   };
 
@@ -47,7 +51,7 @@ function UpdateSponsorForm({ sponsor }) {
       await axiosClient({
         url: deleteURL,
         method: "DELETE",
-        data: sponsor,
+        data: formState, // Use form state instead of sponsor directly
       })
         .then((res) => {
           if (res.status === 200) {
@@ -61,6 +65,10 @@ function UpdateSponsorForm({ sponsor }) {
     }
   };
 
+  const resetForm = () => {
+    setFormState(originalState);
+  };
+
   return (
     <div>
       <div className="flex items-center justify-center h-full bg-white">
@@ -71,8 +79,8 @@ function UpdateSponsorForm({ sponsor }) {
                 Update&nbsp;/&nbsp;Remove Current sponsor
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
-                This page is designed for update sponsor information that
-                has been displayed on the About page and also support remove
+                This page is designed for update sponsor information that has
+                been displayed on the About page and also support remove
                 sponsor.
               </p>
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -89,9 +97,9 @@ function UpdateSponsorForm({ sponsor }) {
                         type="text"
                         name="sponsor-name"
                         id="sponsor-name"
-                        value={state ? state.name : ""}
+                        value={formState ? formState.name : ""}
                         onChange={(e) => {
-                          setState((prevPost) => ({
+                          setFormState((prevPost) => ({
                             ...prevPost,
                             name: e.target.value,
                           }));
@@ -118,9 +126,9 @@ function UpdateSponsorForm({ sponsor }) {
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       name="sponsor-name"
                       id="sponsor-name"
-                      value={state ? state.phone : ""}
+                      value={formState ? formState.phone : ""}
                       onChange={(e) => {
-                        setState((prevPost) => ({
+                        setFormState((prevPost) => ({
                           ...prevPost,
                           phone: e.target.value,
                         }));
@@ -149,7 +157,7 @@ function UpdateSponsorForm({ sponsor }) {
                   "Are you sure you want to cancel? All entered information will be lost."
                 );
                 if (confirmReset) {
-                  //   resetForm();
+                  resetForm();
                   alert("Form reset successful!"); // Optional: Show a success alert
                 }
               }}

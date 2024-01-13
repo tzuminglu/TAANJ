@@ -6,6 +6,7 @@ import CreateOrgForm from "../components/Admin/About/Org/CreateOrgForm";
 import UpdateOrgPage from "../components/Admin/About/Org/UpdateOrgPage";
 import CreateSponsorForm from "../components/Admin/About/Sponsors/CreateSponsorForm";
 import UpdateSponsorPage from "../components/Admin/About/Sponsors/UpdateSponsorPage";
+import CreatePhotoForm from "../components/Admin/Photos/CreatePhotoForm";
 
 function Admin() {
   const initialState = {
@@ -186,10 +187,10 @@ function Admin() {
             </a>
             {state.photosDropdown && (
               <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
-                {/* <li onClick={() => showForm("createUpcomingEvent")}>
-                  <a>Add New Member</a>
+                <li onClick={() => showForm("createImageForm")}>
+                  <a className="flex justify-between">Add New Photos</a>
                 </li>
-                <li onClick={() => showForm("updateUpcomingEvent")}>
+                {/* <li onClick={() => showForm("updateUpcomingEvent")}>
                   <a>Update Member</a>
                 </li> */}
               </ul>
@@ -201,6 +202,7 @@ function Admin() {
       {state.formType === "updateUpcomingEvent" && <UpdateForm />}
       {state.formType === "createOrg" && <CreateOrgForm />}
       {state.formType === "createSponsor" && <CreateSponsorForm />}
+      {state.formType === "createImageForm" && <CreatePhotoForm />}
       {state.cardType === "updateOrg" && <UpdateOrgPage />}
       {state.cardType === "updateSponsor" && <UpdateSponsorPage />}
     </div>

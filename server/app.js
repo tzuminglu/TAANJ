@@ -43,6 +43,11 @@ app.use("/admin/about", async (req, res, next) => {
   next();
 });
 
+// routes for admin photos
+app.use("/admin/photos", async (req, res, next) => {
+  next();
+});
+
 configRoutes(app);
 
 app.listen(port, () => {

@@ -33,7 +33,7 @@ function UpdateOrgCard({ org }) {
                 </div>
                 <div className="modal-action">
                   <label htmlFor={`modal-${org.name}`} className="btn">
-                    Close!
+                    Close
                   </label>
                 </div>
               </div>
