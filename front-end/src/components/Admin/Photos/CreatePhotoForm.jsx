@@ -162,6 +162,9 @@ function CreatePhotoForm() {
                       PNG, JPG, JPEG, GIF up to 10MB
                       <br />
                       <strong>Accept a maximum of 10 photos for upload</strong>
+                      <br />
+                      (Press the Control button to select multiple images in
+                      your folder)
                     </p>
                   </div>
                 </div>
@@ -180,7 +183,7 @@ function CreatePhotoForm() {
                 )}
                 <button
                   type="button"
-                  className="btn btn-success btn-sm text-sm font-semibold text-gray-900 mt-2"
+                  className="btn btn-info btn-sm text-sm font-semibold text-gray-900 mt-2"
                   onClick={handleImagesUpload}
                 >
                   Upload Images
