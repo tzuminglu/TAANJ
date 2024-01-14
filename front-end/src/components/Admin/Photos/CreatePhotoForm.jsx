@@ -8,15 +8,87 @@ import axiosClient from "../../../axios/config.js";
 
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
+const validImageTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];
+const formURL = "/admin/photos";
+const imagesURL = "/admin/photos/photoUpload";
+
 function CreatePhotoForm() {
+  const navigate = useNavigate();
   const initialState = {
     name: "",
+    imageLink: [],
     link: "",
     error: "",
   };
   const [state, setState] = useState(initialState);
-  const handleSubmit = () => {};
-  const handleUpload = () => {};
+  const [images, setImages] = useState(undefined);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { error, ...newData } = state;
+
+    try {
+      const response = await axiosClient({
+        url: formURL,
+        data: newData,
+        method: "POST",
+      });
+
+      if (response.status === 200) {
+        alert("Past event and photos created successfully!");
+        navigate("/photos");
+      } else {
+        alert("Failed to add this event and photos. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error creating photos:", error);
+      alert(
+        "Sorry, an error occurred while adding this event and photo. Please try again."
+      );
+    }
+  };
+
+  const handleSelect = async (e) => {
+    const selectedFiles = e.target.files;
+    setImages(selectedFiles);
+  };
+
+  const handleImagesUpload = async () => {
+    try {
+      const areAllImagesValid = Array.from(images).every((image) =>
+        validImageTypes.includes(image.type)
+      );
+      if (!areAllImagesValid) alert(`Image format is prohibited`);
+      else {
+        const form = new FormData();
+        Array.from(images).forEach((file) => {
+          form.append(`images`, file);
+        });
+
+        const response = await axiosClient({
+          url: imagesURL,
+          data: form,
+          method: "POST",
+        });
+        if (response.status === 200) {
+          setState({ ...state, imageLink: response.data.urls });
+          alert("Photos uploaded successfully!");
+        } else {
+          alert("Failed to uploaded photos. Please try again.");
+        }
+      }
+    } catch (error) {
+      console.error("Error creating photos:", error);
+      alert(
+        "An error occurred while uploading these photos. Please try again."
+      );
+    }
+  };
+
+  const resetForm = () => {
+    setState(initialState);
+  };
 
   return (
     <div className="flex items-center justify-center h-full bg-white">
@@ -33,7 +105,7 @@ function CreatePhotoForm() {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
                 <label
-                  htmlFor="organization-name"
+                  htmlFor="event-photo-name"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Photos of The Event Name
@@ -42,15 +114,15 @@ function CreatePhotoForm() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
                       type="text"
-                      name="organization-name"
-                      id="organization-name"
+                      name="event-photo-name"
+                      id="event-photo-name"
                       value={state.name}
                       onChange={(e) => {
                         setState({ ...state, name: e.target.value });
                       }}
-                      autoComplete="organization-name"
+                      autoComplete="event-photo-name"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Organization Name"
+                      placeholder="Event Name"
                       required
                     />
                   </div>
@@ -75,13 +147,14 @@ function CreatePhotoForm() {
                         htmlFor="file-upload"
                         className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                       >
-                        <span>Upload files</span>
+                        <span>Select files</span>
                         <input
                           id="file-upload"
                           name="file-upload"
                           type="file"
                           className="sr-only"
-                          onChange={handleUpload}
+                          multiple="multiple"
+                          onChange={handleSelect}
                         />
                       </label>
                     </div>
@@ -92,11 +165,27 @@ function CreatePhotoForm() {
                     </p>
                   </div>
                 </div>
-                {/* {state.imageName && (
-                  <p className="text-md mt-3 leading-5 text-gray-600">
-                    {state.imageName}
-                  </p>
-                )} */}
+
+                {images && (
+                  <div>
+                    <p className="text-md mt-3 leading-5 text-gray-600">
+                      Uploaded Image:
+                    </p>
+                    <ul>
+                      {Array.from(images).map((image) => (
+                        <li key={image.lastModified}>{image.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                  onClick={handleImagesUpload}
+                >
+                  Upload Images
+                </button>
+
                 {state.error && <ErrorText>{state.error}</ErrorText>}
                 {/* {uploadError && <ErrorText>{uploadError}</ErrorText>} */}
               </div>
@@ -107,7 +196,7 @@ function CreatePhotoForm() {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
                 <label
-                  htmlFor="link1"
+                  htmlFor="link"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Event Website URL
@@ -115,13 +204,13 @@ function CreatePhotoForm() {
                 <p className="mt-1 text-sm leading-6 text-gray-600"></p>
                 <div className="mt-2">
                   <input
-                    id="link1"
-                    name="link1"
+                    id="link"
+                    name="link"
                     type="text"
-                    autoComplete="link1"
-                    value={state.link1}
+                    autoComplete="link"
+                    value={state.link}
                     onChange={(e) => {
-                      setState({ ...state, link1: e.target.value });
+                      setState({ ...state, link: e.target.value });
                     }}
                     className="block w-full bg-transparent rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder=" Provide website address"
@@ -141,7 +230,7 @@ function CreatePhotoForm() {
                 "Are you sure you want to cancel? All entered information will be lost."
               );
               if (confirmReset) {
-                // resetForm();
+                resetForm();
                 alert("Form reset successful!"); // Optional: Show a success alert
               }
             }}

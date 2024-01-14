@@ -10,7 +10,7 @@ const upload = multer({ storage });
 const router = Router();
 
 router.get("/photos", cors(), async (req, res) => {
-  console.log("I'm in /photos");
+  console.log("I'm in /photos get functionality");
   try {
     const photos = await photoFn.getAllPhotos();
     res.status(200).json({ photos });
@@ -31,18 +31,18 @@ router.post("/admin/photos", cors(), async (req, res) => {
 
 router.post(
   "/admin/photos/photoUpload",
-  upload.any("image"),
+  upload.array("images", 10),
   cors(),
   async (req, res) => {
     console.log("I'm in /admin/photos/photoUpload post fuinctionality");
-    const { files } = req;
+    const images = req.files;
     const folder = "photos/"; // aws folder
-    if (!files) return res.status(400).json({ message: "Bad request" });
+    if (!images) return res.status(400).json({ message: "Bad request" });
 
     try {
       // Use Promise.all to wait for all uploads to complete
-      const uploadPromises = files.map(async (file) => {
-        const result = await uploadFileToS3(folder, file);
+      const uploadPromises = images.map(async (image) => {
+        const result = await uploadFileToS3(folder, image);
         return result.url;
       });
 
