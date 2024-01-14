@@ -180,11 +180,17 @@ function CreatePhotoForm() {
                 )}
                 <button
                   type="button"
-                  className="text-sm font-semibold leading-6 text-gray-900"
+                  className="btn btn-success btn-sm text-sm font-semibold text-gray-900 mt-2"
                   onClick={handleImagesUpload}
                 >
                   Upload Images
                 </button>
+                <p className="text-xs leading-5 text-left text-gray-600">
+                  <strong>
+                    Ensure that the images are uploaded before submitting the
+                    form.
+                  </strong>
+                </p>
 
                 {state.error && <ErrorText>{state.error}</ErrorText>}
                 {/* {uploadError && <ErrorText>{uploadError}</ErrorText>} */}
