@@ -168,18 +168,18 @@ function ResponsiveAppBar() {
                 <MenuItem
                   onClick={() => {
                     handleCloseUserMenu();
-                    doSignOut();
-                  }}
-                >
-                  <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleCloseUserMenu();
                     navigate("/admin");
                   }}
                 >
                   <Typography textAlign="center">Admin</Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    doSignOut();
+                  }}
+                >
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               </Menu>
             </Box>

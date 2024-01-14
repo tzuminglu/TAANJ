@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import ErrorText from "../../General/ErrorText";
-import useUploadImage from "../../../hooks/useUploadImage";
+import ErrorText from "../../../General/ErrorText";
+import useUploadImage from "../../../../hooks/useUploadImage";
 
 import dayjs from "dayjs";
-import axiosClient from "../../../axios/config";
+import axiosClient from "../../../../axios/config";
 
 import { PhotoIcon } from "@heroicons/react/24/solid";
 

@@ -20,7 +20,7 @@ export default function MembersCard({ member }) {
         p: 2,
         maxWidth: 400,
         width: "100%",
-        height: "100%", 
+        height: "100%",
         backgroundColor: (theme) =>
           theme.palette.mode === "dark" ? "#1A2027" : "#fff",
         position: "relative",
@@ -32,7 +32,10 @@ export default function MembersCard({ member }) {
       <Grid container spacing={2}>
         <Grid item>
           <ButtonBase sx={{ maxWidth: 128, maxHeight: 128 }}>
-            <Img alt="complex" src={noImage} />
+            <Img
+              alt="complex"
+              src={member.imageURL ? member.imageURL : noImage}
+            />
           </ButtonBase>
         </Grid>
         <Grid item xs={12} sm container>
@@ -44,7 +47,7 @@ export default function MembersCard({ member }) {
                 component="div"
                 sx={{ fontFamily: "monospace" }}
               >
-                {member && member.title}
+                {member && member.role}
               </Typography>
               <Typography
                 variant="body1"

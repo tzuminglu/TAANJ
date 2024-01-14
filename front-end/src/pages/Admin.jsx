@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-import CreateForm from "../components/Admin/UpcomingEvent/CreateForm";
-import UpdateForm from "../components/Admin/UpcomingEvent/UpdateForm";
+import CreateForm from "../components/Admin/Home/UpcomingEvent/CreateForm";
+import UpdateForm from "../components/Admin/Home/UpcomingEvent/UpdateForm";
 import CreateOrgForm from "../components/Admin/About/Org/CreateOrgForm";
 import UpdateOrgPage from "../components/Admin/About/Org/UpdateOrgPage";
 import CreateSponsorForm from "../components/Admin/About/Sponsors/CreateSponsorForm";
 import UpdateSponsorPage from "../components/Admin/About/Sponsors/UpdateSponsorPage";
 import CreatePhotoForm from "../components/Admin/Photos/CreatePhotoForm";
+import CreateMemberForm from "../components/Admin/Members/CreateMemberForm";
+import UpdateMemberPage from "../components/Admin/Members/UpdateMemberPage";
 
 function Admin() {
   const initialState = {
@@ -40,6 +42,21 @@ function Admin() {
     setState({ ...initialState, cardType });
   };
 
+  const components = {
+    createUpcomingEvent: <CreateForm />,
+    updateUpcomingEvent: <UpdateForm />,
+    createOrg: <CreateOrgForm />,
+    createSponsor: <CreateSponsorForm />,
+    createImageForm: <CreatePhotoForm />,
+    createMemberForm: <CreateMemberForm />,
+    updateOrg: <UpdateOrgPage />,
+    updateSponsor: <UpdateSponsorPage />,
+    updateMember: <UpdateMemberPage />,
+  };
+
+  const componentToRender =
+    components[state.formType || state.cardType] || null;
+
   return (
     <div>
       <div className="dropdown dropdown-hover">
@@ -52,7 +69,7 @@ function Admin() {
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-64"
+          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-80"
         >
           <li onClick={(e) => toggleDropdown("homeDropdown", e)}>
             <a className="flex justify-between">
@@ -61,19 +78,19 @@ function Admin() {
             </a>
 
             {state.homeDropdown && (
-              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-72">
                 <li onClick={(e) => toggleDropdown("upcomingEventDropdown", e)}>
                   <a className="flex justify-between">
                     Upcoming Event
                     <span>&gt;</span>
                   </a>
                   {state.upcomingEventDropdown && (
-                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-40">
+                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-64">
                       <li onClick={() => showForm("createUpcomingEvent")}>
                         <a>Add New Event</a>
                       </li>
                       <li onClick={() => showForm("updateUpcomingEvent")}>
-                        <a>Update Event Info.</a>
+                        <a>Update/Remove Event Info.</a>
                       </li>
                     </ul>
                   )}
@@ -88,7 +105,7 @@ function Admin() {
                     <span>&gt;</span>
                   </a>
                   {state.pastEventDropdown && (
-                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-40">
+                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-64">
                       <li>
                         <a>Event 1</a>
                       </li>
@@ -123,12 +140,12 @@ function Admin() {
                     <span>&gt;</span>
                   </a>
                   {state.organizationDropdown && (
-                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-64">
                       <li onClick={() => showForm("createOrg")}>
                         <a>Add New Organization</a>
                       </li>
                       <li onClick={() => showCard("updateOrg")}>
-                        <a>Update Organization</a>
+                        <a>Update/Remove Organization</a>
                       </li>
                     </ul>
                   )}
@@ -143,12 +160,12 @@ function Admin() {
                     <span>&gt;</span>
                   </a>
                   {state.sponsorDropdown && (
-                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+                    <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-64">
                       <li onClick={() => showForm("createSponsor")}>
                         <a>Add New Sponsor</a>
                       </li>
                       <li onClick={() => showCard("updateSponsor")}>
-                        <a>Update Sponsor</a>
+                        <a>Update/Remove Sponsor</a>
                       </li>
                     </ul>
                   )}
@@ -166,13 +183,13 @@ function Admin() {
               <span>&gt;</span>
             </a>
             {state.memberDropdown && (
-              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
-                {/* <li onClick={() => showForm("createUpcomingEvent")}>
-                  <a>Add New Member</a>
+              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-64">
+                <li onClick={() => showForm("createMemberForm")}>
+                  <a>Add A New Member</a>
                 </li>
-                <li onClick={() => showForm("updateUpcomingEvent")}>
-                  <a>Update Member</a>
-                </li> */}
+                <li onClick={() => showCard("updateMember")}>
+                  <a>Update/Remove Member Info.</a>
+                </li>
               </ul>
             )}
           </li>
@@ -186,7 +203,7 @@ function Admin() {
               <span>&gt;</span>
             </a>
             {state.photosDropdown && (
-              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+              <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-64">
                 <li onClick={() => showForm("createImageForm")}>
                   <a className="flex justify-between">Add New Photos</a>
                 </li>
@@ -198,13 +215,7 @@ function Admin() {
           </li>
         </ul>
       </div>
-      {state.formType === "createUpcomingEvent" && <CreateForm />}
-      {state.formType === "updateUpcomingEvent" && <UpdateForm />}
-      {state.formType === "createOrg" && <CreateOrgForm />}
-      {state.formType === "createSponsor" && <CreateSponsorForm />}
-      {state.formType === "createImageForm" && <CreatePhotoForm />}
-      {state.cardType === "updateOrg" && <UpdateOrgPage />}
-      {state.cardType === "updateSponsor" && <UpdateSponsorPage />}
+      {componentToRender}
     </div>
   );
 }

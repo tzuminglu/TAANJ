@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import ErrorText from "../../../General/ErrorText";
-import useUploadImage from "../../../../hooks/useUploadImage";
+import ErrorText from "../../General/ErrorText";
+import useUploadImage from "../../../hooks/useUploadImage";
 
-import axiosClient from "../../../../axios/config";
+import axiosClient from "../../../axios/config";
 
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
 const validImageTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
 
-const imageURL = "/admin/about/organization/imageupload";
-const formURL = "/admin/about/organization/create";
+const imageURL = "/admin/members/imageupload";
+const formURL = "/admin/members";
 
-function CreateOrgForm() {
+function CreateMemberForm() {
   const navigate = useNavigate();
   const initialState = {
     name: "",
-    description: "",
+    role: "",
     imageName: "",
     imageURL: undefined,
-    link1: "",
+    contact: "",
     error: "",
   };
   const [state, setState] = useState(initialState);
@@ -61,26 +61,26 @@ function CreateOrgForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let { error, ...newOrg } = state; //excpet error element
-    newOrg = { ...newOrg, imageURL: uploadImageURL };
+    let { error, ...newMember } = state; //excpet error element
+    newMember = { ...newMember, imageURL: uploadImageURL };
 
     try {
       const response = await axiosClient({
         url: formURL,
-        data: newOrg,
+        data: newMember,
         method: "POST",
       });
 
       if (response.status === 200) {
-        alert("Organiztion created successfully!");
+        alert("Member created successfully!");
         resetForm();
-        navigate("/about");
+        navigate("/members");
       } else {
-        alert("Failed to create event. Please try again.");
+        alert("Failed to create member. Please try again.");
       }
     } catch (error) {
-      console.error("Error creating organiztion:", error);
-      alert("An error occurred while creating the organization. Please try again.");
+      console.error("Error creating member:", error);
+      alert("An error occurred while creating the member. Please try again.");
     }
   };
 
@@ -90,33 +90,33 @@ function CreateOrgForm() {
         <div className="space-y-12">
           <div>
             <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Create a New Organization
+              Create a New Member
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              This page is designed for creating new organization member that
-              will be displayed on the About page.
+              This page is designed for creating new member that will be
+              displayed on the Members page.
             </p>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
                 <label
-                  htmlFor="organization-name"
+                  htmlFor="member-name"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Organization Name
+                  Member&apos;s Name
                 </label>
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
                       type="text"
-                      name="organization-name"
-                      id="organization-name"
+                      name="member-name"
+                      id="member-name"
                       value={state.name}
                       onChange={(e) => {
                         setState({ ...state, name: e.target.value });
                       }}
-                      autoComplete="organization-name"
+                      autoComplete="member-name"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Organization Name"
+                      placeholder="Member Name"
                       required
                     />
                   </div>
@@ -125,33 +125,35 @@ function CreateOrgForm() {
 
               <div className="col-span-full">
                 <label
-                  htmlFor="organization-description"
+                  htmlFor="member-role"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Brief Introduction to the Organization
+                  Member&apos;s Role
                 </label>
                 <div className="mt-2">
-                  <textarea
-                    id="organization-description"
-                    name="organization-description"
-                    onChange={(e) => {
-                      setState({ ...state, description: e.target.value });
-                    }}
-                    wrap="hard"
-                    rows={2}
-                    className="block w-full bg-transparent rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    value={state.description}
-                    placeholder=" Describe the Organization"
-                  />
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                    <input
+                      type="text"
+                      name="member-role"
+                      id="member-role"
+                      value={state.role}
+                      onChange={(e) => {
+                        setState({ ...state, role: e.target.value });
+                      }}
+                      autoComplete="member-role"
+                      className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      placeholder="Member Name"
+                    />
+                  </div>
                 </div>
               </div>
 
               <div className="col-span-full">
                 <label
-                  htmlFor="cover-photo"
+                  htmlFor="member-photo"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Organization Photo
+                  Member&apos;s Photo
                 </label>
                 <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                   <div className="text-center">
@@ -194,24 +196,24 @@ function CreateOrgForm() {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
                 <label
-                  htmlFor="link1"
+                  htmlFor="contact"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Website Address
+                  Contact Infornation
                 </label>
                 <p className="mt-1 text-sm leading-6 text-gray-600"></p>
                 <div className="mt-2">
                   <input
-                    id="link1"
-                    name="link1"
+                    id="contact"
+                    name="contact"
                     type="text"
-                    autoComplete="link1"
-                    value={state.link1}
+                    autoComplete="contact"
+                    value={state.contact}
                     onChange={(e) => {
-                      setState({ ...state, link1: e.target.value });
+                      setState({ ...state, contact: e.target.value });
                     }}
                     className="block w-full bg-transparent rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    placeholder=" Provide website address"
+                    placeholder=" Provide member's contact information"
                   />
                 </div>
               </div>
@@ -247,4 +249,4 @@ function CreateOrgForm() {
   );
 }
 
-export default CreateOrgForm;
+export default CreateMemberForm;

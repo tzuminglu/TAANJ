@@ -28,7 +28,7 @@ function CreateSponsorForm() {
       if (response.status === 200) {
         alert("Sponsors created successfully!");
         resetForm();
-        navigate("/About");
+        navigate("/about");
       } else {
         alert("Failed to create organization. Please try again.");
       }

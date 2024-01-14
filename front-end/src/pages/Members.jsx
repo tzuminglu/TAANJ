@@ -1,6 +1,7 @@
-import * as React from "react";
-import MembersCard from "../components/Member/MembersCard";
+import { useEffect } from "react";
+import MembersCard from "../components/Members/MembersCard";
 import { Grid } from "@mui/material";
+import useFetchData from "../hooks/useFetchData";
 
 const members = [
   { title: "President", name: "Tina", contact: "" },
@@ -14,16 +15,30 @@ const members = [
   { title: "Activity coordinator", name: "小沈", contact: "" },
 ];
 
+const memebersURL = "/members";
+
 export default function Members() {
+  const {
+    mutate: fetchMembers,
+    isloading: fetchingMembers,
+    error: fecthMembersError,
+    data: Membersdata,
+  } = useFetchData({ url: memebersURL });
+
+  useEffect(() => {
+    fetchMembers();
+  }, []);
+
   return (
     <Grid
       container
-      sx={{ display: "flex", justifyContent: "center",  alignItems: "center" }}
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      {members &&
-        members.map((member) => {
-          return <MembersCard key={member.name} member={member} />;
-        })}
+      {!fetchingMembers && Membersdata
+        ? Membersdata.members.map((member) => {
+            return <MembersCard key={member.name} member={member} />;
+          })
+        : null}
     </Grid>
   );
 }
