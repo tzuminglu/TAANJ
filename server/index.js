@@ -23,12 +23,26 @@ app.use(express.json());
 // online deployed
 app.use(
   cors({
-    origin: "*",
+    origin: ["https://taanj-client.vercel.app", "http://localhost:5173"],
     methods: "*",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", [
+    "https://taanj-client.vercel.app",
+    "http://localhost:5173",
+  ]);
+  res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 app.get("/", async (req, res) => {
   res.json("Hello World! 123");
@@ -39,29 +53,29 @@ app.use("/", async (req, res, next) => {
 });
 
 // routes for admin upcoming event
-// app.use("/admin/upcomingevent", async (req, res, next) => {
-//   next();
-// });
+app.use("/admin/upcomingevent", async (req, res, next) => {
+  next();
+});
 
 // routes for admin about
-// app.use("/admin/about", async (req, res, next) => {
-//   next();
-// });
+app.use("/admin/about", async (req, res, next) => {
+  next();
+});
 
 // routes for admin photos
-// app.use("/admin/photos", async (req, res, next) => {
-//   next();
-// });
+app.use("/admin/photos", async (req, res, next) => {
+  next();
+});
 
 // routes for admin members
-// app.use("/admin/members", async (req, res, next) => {
-//   next();
-// });
+app.use("/admin/members", async (req, res, next) => {
+  next();
+});
 
 // routes for admin pastevent
-// app.use("/admin/pastevent", async (req, res, next) => {
-//   next();
-// });
+app.use("/admin/pastevent", async (req, res, next) => {
+  next();
+});
 
 configRoutes(app);
 
