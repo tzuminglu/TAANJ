@@ -21,13 +21,7 @@ app.use(express.json());
 // );
 
 // online deployed
-app.use(
-  cors({
-    origin: "https://taanj-client.vercel.app",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.get("/", async (req, res) => {
   res.json("Hello World! 123");
