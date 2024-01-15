@@ -48,6 +48,16 @@ app.use("/admin/photos", async (req, res, next) => {
   next();
 });
 
+// routes for admin members
+app.use("/admin/members", async (req, res, next) => {
+  next();
+});
+
+// routes for admin pastevent
+app.use("/admin/pastevent", async (req, res, next) => {
+  next();
+});
+
 configRoutes(app);
 
 app.listen(port, () => {

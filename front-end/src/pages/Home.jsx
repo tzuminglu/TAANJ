@@ -1,15 +1,13 @@
-import React from "react";
-
-import ActivitySlide from "../components/Home/ActivitySlide";
 import AboutSlide from "../components/Home/AboutSlide";
 import RegularCard from "../components/Home/RegularCard";
 import UpcomingEvent from "../components/Home/UpcomingEvent";
+import PastEvent from "../components/Home/PastEvent";
 
-import image1 from "../../public/RegularActivity/CardBackground/Taipei-101-Towerjpg.jpg"
-import image2 from "../../public/RegularActivity/CardBackground/Mount-Yu-Shan.jpg"
-import image3 from "../../public/RegularActivity/CardBackground/Qingshui-Cliff.jpg"
-import image4 from "../../public/RegularActivity/CardBackground/Sun-Moon-Lake.jpg"
-import image5 from "../../public/RegularActivity/CardBackground/Jiufen-Old-Street.jpg"
+import image1 from "../../public/RegularActivity/CardBackground/Taipei-101-Towerjpg.jpg";
+import image2 from "../../public/RegularActivity/CardBackground/Mount-Yu-Shan.jpg";
+import image3 from "../../public/RegularActivity/CardBackground/Qingshui-Cliff.jpg";
+import image4 from "../../public/RegularActivity/CardBackground/Sun-Moon-Lake.jpg";
+import image5 from "../../public/RegularActivity/CardBackground/Jiufen-Old-Street.jpg";
 
 const activities = [
   {
@@ -116,8 +114,6 @@ const regularActivities = [
   },
 ];
 
-const activitiesNum = activities.length;
-
 function Home() {
   return (
     <>
@@ -147,21 +143,20 @@ function Home() {
           </figure>
         </div>
       </div>
-
       <div className="divider"></div>
-
       {/* Goals */}
-      <div className="flex items-center justify-center">
-        <div className="h-screen carousel carousel-vertical rounded-box">
+      <div className="flex items-center justify-center relative">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
+          About Us
+        </h2>
+        <div className="h-screen mt-12 carousel carousel-vertical rounded-box">
           {about &&
             about.map((ele) => {
               return <AboutSlide key={ele.id} ele={ele} />;
             })}
         </div>
       </div>
-
       <div className="divider"></div>
-
       {/* Upcoming Events */}
       <div className="flex justify-center w-full gap-2 relative">
         <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
@@ -171,49 +166,26 @@ function Home() {
           <UpcomingEvent />
         </div>
       </div>
-
       <div className="divider"></div>
-
       {/* Past Events Components */}
       <div className="flex justify-center w-full gap-2 relative">
         <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
           Past Events
         </h2>
-        <div className="carousel rounded-box w-7/12 h-auto mt-12">
-          {activities &&
-            activities.map((activity) => {
-              return (
-                <ActivitySlide
-                  key={activity.id}
-                  activity={activity}
-                  activitiesNum={activitiesNum}
-                />
-              );
-            })}
-        </div>
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex justify-center py-2 gap-2 w-full">
-          {activities &&
-            activities.map((activity) => {
-              return (
-                <a
-                  href={`#${activity.id}`}
-                  className="btn btn-xs"
-                  key={activity.id}
-                >
-                  {activity.id}
-                </a>
-              );
-            })}
-        </div>
+        <PastEvent />
       </div>
-
       {/* Regular Activities */}
       <div className="divider"></div>
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-1 sm:mx-1 md:grid-cols-2 md:mx-3 lg:grid-cols-3 lg:gap-3 xl:grid-cols-4 xl:gap-3 2xl:grid-cols-5 2xl:gap-3">
-        {regularActivities &&
-          regularActivities.map((activity) => {
-            return <RegularCard key={activity.id} activity={activity} />;
-          })}
+      <div className="flex justify-center w-full gap-2 relative">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
+          Past Events
+        </h2>
+        <div className="grid grid-cols-1 gap-2 mt-12 sm:grid-cols-1 sm:mx-1 md:grid-cols-2 md:mx-3 lg:grid-cols-3 lg:gap-3 xl:grid-cols-4 xl:gap-3 2xl:grid-cols-5 2xl:gap-3">
+          {regularActivities &&
+            regularActivities.map((activity) => {
+              return <RegularCard key={activity.id} activity={activity} />;
+            })}
+        </div>
       </div>
     </>
   );

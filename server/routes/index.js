@@ -1,7 +1,8 @@
 import upcomingeventRoutes from "./upcomingEvent.js";
 import aboutRoutes from "./about.js";
 import photoRoutes from "./photos.js";
-import memberRoutes from "./members.js"
+import memberRoutes from "./members.js";
+import pasteventRoutes from "./pastEvent.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -11,6 +12,7 @@ const constructorMethod = (app) => {
   app.use("/", aboutRoutes);
   app.use("/", photoRoutes);
   app.use("/", memberRoutes);
+  app.use("/", pasteventRoutes);
 
   app.use("*", (req, res) => {
     // res.sendFile(

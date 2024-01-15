@@ -7,8 +7,11 @@ import UpdateOrgPage from "../components/Admin/About/Org/UpdateOrgPage";
 import CreateSponsorForm from "../components/Admin/About/Sponsors/CreateSponsorForm";
 import UpdateSponsorPage from "../components/Admin/About/Sponsors/UpdateSponsorPage";
 import CreatePhotoForm from "../components/Admin/Photos/CreatePhotoForm";
+import UpdatePhotoPage from "../components/Admin/Photos/UpdatePhotoPage";
 import CreateMemberForm from "../components/Admin/Members/CreateMemberForm";
 import UpdateMemberPage from "../components/Admin/Members/UpdateMemberPage";
+import CreatePastForm from "../components/Admin/Home/PastEvent/CreatePastForm";
+import UpdatePastForm from "../components/Admin/Home/PastEvent/UpdatePastForm";
 
 function Admin() {
   const initialState = {
@@ -52,6 +55,9 @@ function Admin() {
     updateOrg: <UpdateOrgPage />,
     updateSponsor: <UpdateSponsorPage />,
     updateMember: <UpdateMemberPage />,
+    updatePhotoPage: <UpdatePhotoPage />,
+    createPastEvent: <CreatePastForm />,
+    updatePastEvent: <UpdatePastForm />,
   };
 
   const componentToRender =
@@ -106,11 +112,11 @@ function Admin() {
                   </a>
                   {state.pastEventDropdown && (
                     <ul className="ml-4 mt-2 p-2 shadow bg-base-100 rounded-box w-64">
-                      <li>
-                        <a>Event 1</a>
+                      <li onClick={() => showForm("createPastEvent")}>
+                        <a>Add New Past Event</a>
                       </li>
-                      <li>
-                        <a>Event 2</a>
+                      <li onClick={() => showForm("updatePastEvent")}>
+                        <a>Update/Remove Past Event</a>
                       </li>
                     </ul>
                   )}
@@ -207,9 +213,9 @@ function Admin() {
                 <li onClick={() => showForm("createImageForm")}>
                   <a className="flex justify-between">Add New Photos</a>
                 </li>
-                {/* <li onClick={() => showForm("updateUpcomingEvent")}>
-                  <a>Update Member</a>
-                </li> */}
+                <li onClick={() => showCard("updatePhotoPage")}>
+                  <a>Update/Remove Photos Info.</a>
+                </li>
               </ul>
             )}
           </li>
