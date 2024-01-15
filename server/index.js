@@ -10,9 +10,20 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+// local address
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true,
+//   })
+// );
+
+// online deployed
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://taanj-client.vercel.app/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
