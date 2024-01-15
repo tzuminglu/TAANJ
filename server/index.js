@@ -23,7 +23,7 @@ app.use(express.json());
 // online deployed
 app.use(
   cors({
-    origin: "https://taanj-client.vercel.app",
+    origin: "*",
     methods: "*",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
