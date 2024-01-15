@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 
 import taanj from "./assets/TAANJ.png";
@@ -16,7 +16,6 @@ import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import Divider from "@mui/material/Divider";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
 
 import { AuthProvider } from "./contexts/AuthContext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -31,20 +30,12 @@ const Img = styled("img")({
   marginTop: "2%",
 });
 
-const Footer = styled("div")({
-  position: "fixed",
-  bottom: "3%",
-  right: "1%",
-  zIndex: "1000",
-});
-
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     onAuthStateChanged(getAuth(), (user) => {
       if (user) {
-        const uid = user.uid;
         setUser(user);
       } else {
         setUser(null);
@@ -76,7 +67,6 @@ function App() {
               element={user ? <Admin /> : <Navigate to={"/login"} />}
             />
           </Routes>
-
         </main>
         <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded mt-20">
           <nav>

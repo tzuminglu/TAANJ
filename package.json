@@ -1,0 +1,26 @@
+{
+  "name": "taanj",
+  "version": "1.0.0",
+  "description": "This is reformat TAANJ website to React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test specified\"",
+    "prepare": "husky install"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  }
+}
