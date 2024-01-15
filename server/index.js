@@ -39,29 +39,29 @@ app.use("/", async (req, res, next) => {
 });
 
 // routes for admin upcoming event
-app.use("/admin/upcomingevent", async (req, res, next) => {
-  next();
-});
+// app.use("/admin/upcomingevent", async (req, res, next) => {
+//   next();
+// });
 
 // routes for admin about
-app.use("/admin/about", async (req, res, next) => {
-  next();
-});
+// app.use("/admin/about", async (req, res, next) => {
+//   next();
+// });
 
 // routes for admin photos
-app.use("/admin/photos", async (req, res, next) => {
-  next();
-});
+// app.use("/admin/photos", async (req, res, next) => {
+//   next();
+// });
 
 // routes for admin members
-app.use("/admin/members", async (req, res, next) => {
-  next();
-});
+// app.use("/admin/members", async (req, res, next) => {
+//   next();
+// });
 
 // routes for admin pastevent
-app.use("/admin/pastevent", async (req, res, next) => {
-  next();
-});
+// app.use("/admin/pastevent", async (req, res, next) => {
+//   next();
+// });
 
 configRoutes(app);
 
