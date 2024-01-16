@@ -56,6 +56,7 @@ router.post(
   upload.single("image"),
   async (req, res) => {
     console.log("I'm in /admin/upcomingevent/imageupload");
+    console.log(req);
     const { file } = req;
     const folder = "upcomingevent/"; // aws folder
     console.log(file);
