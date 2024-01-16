@@ -25,7 +25,6 @@ app.use(
   cors({
     origin: ["https://taanj-client.vercel.app", "http://localhost:5173"],
     methods: "*",
-    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
