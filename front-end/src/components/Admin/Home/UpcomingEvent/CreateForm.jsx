@@ -59,6 +59,7 @@ function CreateForm() {
       alert("Image size is greater than 10MB");
     } else {
       setImage(file);
+      console.log(file);
       const form = new FormData();
       form.append("image", file);
       await uploadImage(form);
