@@ -58,6 +58,7 @@ router.post(
     console.log("I'm in /admin/upcomingevent/imageupload");
     const { file } = req;
     const folder = "upcomingevent/"; // aws folder
+    console.log(file);
     if (!file) return res.status(400).json({ message: "Bad request" });
 
     const { error, url } = await uploadFileToS3(folder, file);
