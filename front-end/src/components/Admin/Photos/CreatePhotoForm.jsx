@@ -70,6 +70,7 @@ function CreatePhotoForm() {
           url: imagesURL,
           data: form,
           method: "POST",
+          headers: { "Content-Type": "multipart/form-data" },
         });
         if (response.status === 200) {
           setState({ ...state, imageLink: response.data.urls });

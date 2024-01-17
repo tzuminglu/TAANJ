@@ -146,7 +146,7 @@ function Home() {
       <div className="divider"></div>
       {/* Goals */}
       <div className="flex items-center justify-center relative">
-        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
           About Us
         </h2>
         <div className="h-screen mt-12 carousel carousel-vertical rounded-box">
@@ -159,7 +159,7 @@ function Home() {
       <div className="divider"></div>
       {/* Upcoming Events */}
       <div className="flex justify-center w-full gap-2 relative">
-        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
           Upcoming Events
         </h2>
         <div className="carousel rounded-box w-7/12 h-auto mt-12">
@@ -169,7 +169,7 @@ function Home() {
       <div className="divider"></div>
       {/* Past Events Components */}
       <div className="flex justify-center w-full gap-2 relative">
-        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
           Past Events
         </h2>
         <PastEvent />
@@ -177,10 +177,10 @@ function Home() {
       {/* Regular Activities */}
       <div className="divider"></div>
       <div className="flex justify-center w-full gap-2 relative">
-        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-3xl">
-          Past Events
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
+          Regular Events
         </h2>
-        <div className="grid grid-cols-1 gap-2 mt-12 sm:grid-cols-1 sm:mx-1 md:grid-cols-2 md:mx-3 lg:grid-cols-3 lg:gap-3 xl:grid-cols-4 xl:gap-3 2xl:grid-cols-5 2xl:gap-3">
+        <div className="grid grid-cols-1 gap-2 mt-16 sm:grid-cols-1 sm:mx-1 md:grid-cols-2 md:mx-3 lg:grid-cols-3 lg:gap-3 xl:grid-cols-4 xl:gap-3 2xl:grid-cols-5 2xl:gap-3">
           {regularActivities &&
             regularActivities.map((activity) => {
               return <RegularCard key={activity.id} activity={activity} />;

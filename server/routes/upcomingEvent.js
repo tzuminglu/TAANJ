@@ -55,7 +55,7 @@ router.post(
   cors(),
   upload.single("image"),
   async (req, res) => {
-    console.log("I'm in /admin/upcomingevent/imageupload", req);
+    console.log("I'm in /admin/upcomingevent/imageupload");
     const { file } = req;
     const folder = "upcomingevent/"; // aws folder
     if (!file) return res.status(400).json({ message: "Bad request" });

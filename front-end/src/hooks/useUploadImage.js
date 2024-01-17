@@ -11,7 +11,12 @@ const useUploadImage = ({ url, method = "POST" }) => {
   const fn = async (data) => {
     setState({ isLoading: true });
 
-    await axiosClient({ url, method, data })
+    await axiosClient({
+      url,
+      method,
+      data,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
       .then((res) => {
         setState({ isLoading: false, error: "", imageURL: res.data.url });
       })
