@@ -59,7 +59,6 @@ function UpdateForm() {
   //   handle upload image
   const handleUpload = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
     if (!validImageTypes.find((type) => type === file.type)) {
       setError("File must be JPG/PNG/GIF format");
     } else if (file.size > 1000000) {
@@ -70,7 +69,6 @@ function UpdateForm() {
       setImage(file);
       const form = new FormData();
       form.append("image", file);
-      console.log(form);
       await uploadImage(form);
       setError("");
     }

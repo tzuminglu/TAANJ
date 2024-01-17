@@ -9,29 +9,29 @@ import image3 from "../../public/RegularActivity/CardBackground/Qingshui-Cliff.j
 import image4 from "../../public/RegularActivity/CardBackground/Sun-Moon-Lake.jpg";
 import image5 from "../../public/RegularActivity/CardBackground/Jiufen-Old-Street.jpg";
 
-const activities = [
-  {
-    id: "1",
-    name: "04/22/2023 A Letter to A'ma《給阿媽的一封信》at 11am - 2pm",
-    imageInfo:
-      "https://www.taa-nj.org/TAANJ/8868feda09dabf76148d614cad67397c.jpg",
-    url: "https://www.facebook.com/media/set/?set=a.303476155389807&type=3",
-  },
-  {
-    id: "2",
-    name: "09/16/2023 流麻溝十五號",
-    imageInfo:
-      "https://www.taa-nj.org/TAANJ/457bf05a10c7e56f9a2542b5c70e7443.jpg",
-    url: "https://www.facebook.com/media/set/?set=a.334502925620463&type=3",
-  },
-  {
-    id: "3",
-    name: "09/09/2023 UN for Taiwan",
-    imageInfo:
-      "https://www.taa-nj.org/TAANJ/c7bee42dfcb1edb54dab018e8fa2335b.jpg",
-    url: "https://www.facebook.com/media/set/?set=a.334390785631677&type=3",
-  },
-];
+// const activities = [
+//   {
+//     id: "1",
+//     name: "04/22/2023 A Letter to A'ma《給阿媽的一封信》at 11am - 2pm",
+//     imageInfo:
+//       "https://www.taa-nj.org/TAANJ/8868feda09dabf76148d614cad67397c.jpg",
+//     url: "https://www.facebook.com/media/set/?set=a.303476155389807&type=3",
+//   },
+//   {
+//     id: "2",
+//     name: "09/16/2023 流麻溝十五號",
+//     imageInfo:
+//       "https://www.taa-nj.org/TAANJ/457bf05a10c7e56f9a2542b5c70e7443.jpg",
+//     url: "https://www.facebook.com/media/set/?set=a.334502925620463&type=3",
+//   },
+//   {
+//     id: "3",
+//     name: "09/09/2023 UN for Taiwan",
+//     imageInfo:
+//       "https://www.taa-nj.org/TAANJ/c7bee42dfcb1edb54dab018e8fa2335b.jpg",
+//     url: "https://www.facebook.com/media/set/?set=a.334390785631677&type=3",
+//   },
+// ];
 
 const about = [
   {
