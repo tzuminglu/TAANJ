@@ -59,9 +59,7 @@ function UpdateMemberForm({ member }) {
         alert("Failed to update the members. Please try again.");
       }
     } catch (error) {
-      alert(
-        "An error occurred while updating the members. Please try again."
-      );
+      alert("An error occurred while updating the members. Please try again.");
     }
   };
 
@@ -70,7 +68,7 @@ function UpdateMemberForm({ member }) {
     const file = e.target.files[0];
     if (!validImageTypes.find((type) => type === file.type)) {
       setError("File must be JPG/PNG/GIF format");
-    } else if (file.size > 1000000) {
+    } else if (file.size > 10000000) {
       alert("Image size is greater than 10MB");
     } else if (!file) {
       return;
@@ -97,7 +95,7 @@ function UpdateMemberForm({ member }) {
         .then((res) => {
           if (res.status === 200) {
             alert("The members has been successfully deleted!");
-            navigate("/about");
+            navigate("/members");
           }
         })
         .catch((error) => {
@@ -116,8 +114,8 @@ function UpdateMemberForm({ member }) {
                 Update&nbsp;/&nbsp;Remove Current member
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
-                This page is designed for update members information that
-                has been displayed on the About page and also support remove
+                This page is designed for update members information that has
+                been displayed on the Members page and also support remove
                 member.
               </p>
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -155,7 +153,7 @@ function UpdateMemberForm({ member }) {
                     htmlFor="event-description"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                  Member&apos;s role
+                    Member&apos;s role
                   </label>
                   <div className="mt-2">
                     <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -177,7 +175,6 @@ function UpdateMemberForm({ member }) {
                       />
                     </div>
                   </div>
-
                 </div>
 
                 <div className="col-span-full">

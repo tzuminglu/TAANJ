@@ -18,7 +18,7 @@ function PastEvent() {
 
   return (
     <>
-      <div className="carousel rounded-box w-7/12 h-auto mt-12">
+      <div className="mt-16 carousel rounded-box w-7/12 h-auto mt-12">
         {activities &&
           activities.pastevents.map((activity) => {
             return (

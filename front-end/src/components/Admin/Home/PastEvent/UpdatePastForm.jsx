@@ -49,7 +49,7 @@ function UpdatePastForm() {
     const file = e.target.files[0];
     if (!validImageTypes.find((type) => type === file.type)) {
       setError("File must be JPG/PNG/GIF format");
-    } else if (file.size > 1000000) {
+    } else if (file.size > 10000000) {
       alert("Image size is greater than 10MB");
     } else if (!file) {
       return;

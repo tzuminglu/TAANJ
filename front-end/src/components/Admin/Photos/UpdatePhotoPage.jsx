@@ -17,7 +17,7 @@ function UpdatePhotoPage() {
     fetchPhotos();
   }, []);
 
-  console.log(data)
+  console.log(data);
 
   return (
     <div className="flex justify-center">

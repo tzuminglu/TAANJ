@@ -1,8 +1,12 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 import noImage from "../../../assets/no-image.png";
 
-import UpdateMemberForm from "../Members/UpdateMemberForm";
+import UpdatePhotoForm from "./UpdatePhotoForm";
+
+UpdatePhotoCard.propTypes = {
+  photo: PropTypes.object,
+};
 
 function UpdatePhotoCard({ photo }) {
   return (
@@ -12,7 +16,10 @@ function UpdatePhotoCard({ photo }) {
           ? photo.imageLink.map((link, index) => {
               return (
                 <div className="carousel-item relative w-full" key={index}>
-                  <img src={`${link}`} alt={`photo._id-image-${index}`} />
+                  <img
+                    src={link ? `${link}` : noImage}
+                    alt={`photo._id-image-${index}`}
+                  />
                   <p className="image-index absolute top-0 left-04 text-blue-600 bg-black p-1">
                     {index + 1}
                   </p>
@@ -39,7 +46,7 @@ function UpdatePhotoCard({ photo }) {
                 <h3 className="font-bold text-lg">Update {photo.name}</h3>
                 <p className="py-4">Click the button below to close</p>
                 <div>
-                  <UpdateMemberForm photo={photo} />
+                  <UpdatePhotoForm photo={photo} />
                 </div>
                 <div className="modal-action">
                   <label htmlFor={`modal-${photo.name}`} className="btn">

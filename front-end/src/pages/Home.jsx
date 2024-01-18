@@ -143,19 +143,7 @@ function Home() {
           </figure>
         </div>
       </div>
-      <div className="divider"></div>
-      {/* Goals */}
-      <div className="flex items-center justify-center relative">
-        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-          About Us
-        </h2>
-        <div className="h-screen mt-12 carousel carousel-vertical rounded-box">
-          {about &&
-            about.map((ele) => {
-              return <AboutSlide key={ele.id} ele={ele} />;
-            })}
-        </div>
-      </div>
+
       <div className="divider"></div>
       {/* Upcoming Events */}
       <div className="flex justify-center w-full gap-2 relative">
@@ -184,6 +172,20 @@ function Home() {
           {regularActivities &&
             regularActivities.map((activity) => {
               return <RegularCard key={activity.id} activity={activity} />;
+            })}
+        </div>
+      </div>
+
+      <div className="divider"></div>
+      {/* Goals */}
+      <div className="flex items-center justify-center relative">
+        <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
+          About Us
+        </h2>
+        <div className="h-screen mt-16 carousel carousel-vertical rounded-box">
+          {about &&
+            about.map((ele) => {
+              return <AboutSlide key={ele.id} ele={ele} />;
             })}
         </div>
       </div>

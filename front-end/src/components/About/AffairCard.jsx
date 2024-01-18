@@ -42,6 +42,7 @@ function AffairCard({ org }) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          margin: "3%",
         }}
       >
         <CardMedia
