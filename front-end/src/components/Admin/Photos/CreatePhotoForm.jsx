@@ -37,7 +37,7 @@ function CreatePhotoForm() {
 
       if (response.status === 200) {
         alert("Past event and photos created successfully!");
-        navigate("/photos");
+        // navigate("/photos");
       } else {
         alert("Failed to add this event and photos. Please try again.");
       }

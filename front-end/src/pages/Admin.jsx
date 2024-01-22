@@ -213,9 +213,9 @@ function Admin() {
                 <li onClick={() => showForm("createImageForm")}>
                   <a className="flex justify-between">Add New Photos</a>
                 </li>
-                <li onClick={() => showCard("updatePhotoPage")}>
+                {/* <li onClick={() => showCard("updatePhotoPage")}>
                   <a>Update/Remove Photos Info.</a>
-                </li>
+                </li> */}
               </ul>
             )}
           </li>

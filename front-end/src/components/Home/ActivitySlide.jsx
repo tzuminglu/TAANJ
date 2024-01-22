@@ -4,8 +4,12 @@ import Typography from "@mui/material/Typography";
 
 function ActivitySlide({ activity, activitiesNum }) {
   return (
-    <div id={`${activity._id}`} className="carousel-item relative w-full h-auto">
-      <img src={activity && activity.imageInfo} alt={activity.name} />
+    <div id={`${activity._id}`} className="carousel-item relative w-full">
+      <img
+        className="w-full sm:w-full object-contain"
+        src={activity && activity.imageInfo}
+        alt={activity.name}
+      />
       <a href={activity.url} target="_blank" rel="noopener noreferrer">
         <Typography
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center text-blue-600 bg-gray-900

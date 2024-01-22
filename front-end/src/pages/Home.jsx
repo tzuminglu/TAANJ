@@ -2,6 +2,7 @@ import AboutSlide from "../components/Home/AboutSlide";
 import RegularCard from "../components/Home/RegularCard";
 import UpcomingEvent from "../components/Home/UpcomingEvent";
 import PastEvent from "../components/Home/PastEvent";
+import "../index.css";
 
 import image1 from "../../public/RegularActivity/CardBackground/Taipei-101-Towerjpg.jpg";
 import image2 from "../../public/RegularActivity/CardBackground/Mount-Yu-Shan.jpg";
@@ -178,11 +179,11 @@ function Home() {
 
       <div className="divider"></div>
       {/* Goals */}
-      <div className="flex items-center justify-center relative">
+      <div className="flex justify-center w-full relative">
         <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
           About Us
         </h2>
-        <div className="h-screen mt-16 carousel carousel-vertical rounded-box">
+        <div className="sm:w-full max-w-screen-xl h-auto mt-16 mx-2 carousel rounded-box">
           {about &&
             about.map((ele) => {
               return <AboutSlide key={ele.id} ele={ele} />;
