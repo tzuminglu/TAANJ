@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import CreateForm from "../components/Admin/Home/UpcomingEvent/CreateForm";
 import UpdateForm from "../components/Admin/Home/UpcomingEvent/UpdateForm";

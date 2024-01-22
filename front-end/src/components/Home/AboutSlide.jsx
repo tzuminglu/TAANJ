@@ -1,3 +1,9 @@
+import PropTypes from "prop-types";
+
+AboutSlide.propTypes = {
+  ele: PropTypes.object,
+};
+
 function AboutSlide({ ele }) {
   return (
     <div className="carousel-item relative w-full">
