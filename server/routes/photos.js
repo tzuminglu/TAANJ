@@ -3,7 +3,9 @@ import photoFn from "../data/photos.js";
 import { uploadFileToS3 } from "../aws.js";
 import cors from "cors";
 import multer, { memoryStorage } from "multer";
+import { createClient } from "redis";
 
+const client = createClient();
 const storage = memoryStorage();
 const upload = multer({ storage });
 
@@ -12,8 +14,19 @@ const router = Router();
 router.get("/photos", cors(), async (req, res) => {
   console.log("I'm in /photos get functionality");
   try {
-    const photos = await photoFn.getAllPhotos();
-    res.status(200).json({ photos });
+    let photos = await client.get("photos");
+    if (photos) {
+      photos = JSON.parse(photos);
+      setTimeout(() => {
+        console.log("Delayed for 3 second.");
+      }, "3000");
+
+      res.status(200).json({ photos, source: "cache" });
+    } else {
+      photos = await photoFn.getAllPhotos();
+      client.set("photos", JSON.stringify(photos));
+      res.status(200).json({ photos, source: "data" });
+    }
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
