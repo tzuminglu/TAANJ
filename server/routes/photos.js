@@ -3,33 +3,34 @@ import photoFn from "../data/photos.js";
 import { uploadFileToS3 } from "../aws.js";
 import cors from "cors";
 import multer, { memoryStorage } from "multer";
-import { createClient } from "redis";
+// import { createClient } from "redis";
 
 const storage = memoryStorage();
 const upload = multer({ storage });
 
-const host = "awesome.redis.server";
-const port = 6380;
-const client = createClient({ socket: { host, port } });
+// const host = "awesome.redis.server";
+// const port = 6380;
+// const client = createClient({ socket: { host, port } });
 
-client.on("error", (err) => console.log("Redis Client Error", err));
+// client.on("error", (err) => console.log("Redis Client Error", err));
 
-await client.connect();
+// await client.connect();
 
 const router = Router();
 
 router.get("/photos", cors(), async (req, res) => {
   console.log("I'm in /photos get functionality");
   try {
-    let photos = await client.get("photos");
-    if (!photos) {
-      photos = await photoFn.getAllPhotos();
-      client.set("photos", JSON.stringify(photos));
-      console.log("photos from db");
-    } else {
-      photos = JSON.parse(photos);
-      console.log("photos from redis");
-    }
+    //   let photos = await client.get("photos");
+    //   if (!photos) {
+    //     photos = await photoFn.getAllPhotos();
+    //     client.set("photos", JSON.stringify(photos));
+    //     console.log("photos from db");
+    //   } else {
+    //     photos = JSON.parse(photos);
+    //     console.log("photos from redis");
+    //   }
+    let photos = await photoFn.getAllPhotos();
     res.status(200).json({ photos });
   } catch (error) {
     res.status(400).json({ error: error.message });
